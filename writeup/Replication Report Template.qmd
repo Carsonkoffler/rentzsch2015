@@ -1,6 +1,6 @@
 ---
-title: "Replication of Study X by Sample & Sample (20xx, Psychological Science)"
-author: "Replication Author[s] (contact information)"
+title: "Replication of Study 5 by Rentzsch & Gross (2015, European Journal of Personality)"
+author: "Carson Koffler (ckoffler@ucsd.edu)"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
@@ -8,11 +8,18 @@ format:
     toc_depth: 3
 ---
 
+
+
 <!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
 
 ## Introduction
 
-[No abstract is needed.]  Each replication project will have a straightforward, no frills report of the study and results.  These reports will be publicly available as supplementary material for the aggregate report(s) of the project as a whole.  Also, to maximize project integrity, the intro and methods will be written and critiqued in advance of data collection.  Introductions can be just 1-2 paragraphs clarifying the main idea of the original study, the target finding for replication, and any other essential information. You will likely contact the authors of the original study, so this should be professional and forward facing. It will NOT have a literature review -- that is in the original publication. You can write both the introduction and the methods in past tense.  
+I have chosen to replicate Rentzsch and Gross’ (2015) work on looking at dispositional envy on state envy in didactic interactions (study 5). For my first year project, I am interested in studying the methods used to elicit envy to examine if they are truly eliciting what they claim to be (i.e., is this method making you envious or another corollary negative emotion). In refining envy manipulations, we can 1) better understand the boundaries between envy and other negative emotions and 2) make sure we are truly measuring what we intend to measure. Rentzsch and Gross in this study use the classic game - Rock, Paper, Scissors - to measure envy of the advantaged and disadvantaged players. Replicating this study will give us more information about different methods available to our lab for future envy research. Additionally, I can gain insight on the feasibility for this method online, as that is the primary research method our lab uses. 
+
+This study was originally an in-person experiment, but for the purposes of this replication, I will transfer this design to being online. For the procedures, there is a pre-game questionnaire measuring dispositional envy using DSES and social desirability using BIDR. Then, the participants will play rock-paper-scissors (three times for practice and then once to decide a winner). Following the game, there will be another questionnaire to measure state emotions, thoughts about attributes (skill, luck, effect, task difficulty) on the outcome of the game, prior experience with the game, and how much they thought they could have won (pg. 542). 
+
+There is also the obvious concern of how in person games translate to in-person games. It is possible that there is some moderation variable that comes from being in-person that is not replicated online. This game was also originally played with two participants so the analyses run used actor–partner interdependence model (APIM) analyses to control for how the partnership may have influenced any of the outcomes. I would like to discuss the pros and cons of having online participants play each other versus having a participant play a computer and control the outcomes. The former would allow for a more precise replication using APIM, but the latter could also be beneficial because it would remove that confounding factor in total. Lastly, I cannot find all of the exact questions asked online, but I am hoping with continued perusal I will be able to find all the material. If not, I will reach out to the author. 
+
 
 
 ## Methods
