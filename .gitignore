@@ -58,3 +58,6 @@ rsconnect/
 # html files (output by Quarto)
 *.html
 .DS_Store
+# pixi environments
+.pixi/*
+!.pixi/config.toml

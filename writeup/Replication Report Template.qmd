@@ -16,18 +16,48 @@ format:
 
 I have chosen to replicate Rentzsch and Gross’ (2015) work on looking at dispositional envy on state envy in didactic interactions (study 5). For my first year project, I am interested in studying the methods used to elicit envy to examine if they are truly eliciting what they claim to be (i.e., is this method making you envious or another corollary negative emotion). In refining envy manipulations, we can 1) better understand the boundaries between envy and other negative emotions and 2) make sure we are truly measuring what we intend to measure. Rentzsch and Gross in this study use the classic game - Rock, Paper, Scissors - to measure envy of the advantaged and disadvantaged players. Replicating this study will give us more information about different methods available to our lab for future envy research. Additionally, I can gain insight on the feasibility for this method online, as that is the primary research method our lab uses. 
 
-This study was originally an in-person experiment, but for the purposes of this replication, I will transfer this design to being online with the understanding that this will provide evidence for a conceptual replication (not a direct replication). For the procedures, there is a pre-game questionnaire measuring dispositional envy using DSES and social desirability using BIDR. Then, the participants will play rock-paper-scissors (three times for practice and then once to decide a winner). Following the game, there will be another questionnaire to measure state emotions, thoughts about attributes (skill, luck, effect, task difficulty) on the outcome of the game, prior experience with the game, and how much they thought they could have won (pg. 542). I have reached out to the authors of this paper for the exact survey they have used. I am hoping they get back to me soon. 
-
-Since there is a shorter timeline for this project, I think that replicating this survey online will be the most feasible option. Envy is thought to be an upward comparison in which someone has something self-relevant that you desire (Smith & Kim, 2007). That being said, envy should be evoke simply when someone has something and you do not. It is possible that in-person interactions raise the salience of this effect, but it is not necessary for the function of the emotion. I don't think having it be online will completely erase the effects if the function of the design works as intended. I am going to add visual effects and delays within the game to make it feel a little more real. I am unsure what other sanity checks I could add.
-
-I will go over the budget with Mike soon. This study shouldn't require a large sample, it will just depend on how much he recommends compensating participants. 
+This study was originally an in-person experiment, but for the purposes of this replication, I will transfer this design to being online with the understanding that this will provide evidence for a conceptual replication rather than a direct replication. The procedures are as follows (Note: since this is online, some of the procedures are different than the original): 
+  The participants will type in their name or a psuedonym to be applied to the game avatar and be introduced to the other player (an unbeknownst computerized player). The participants will be provided the rules to the rock-paper-scissors game and allowed to play three practice rounds. After practicing, they will play one round for a prize -- an additional monetary incentive (this was done in the 2023 version of the study). Participants will be placed in two conditions: High envy (Lost) and low envy (Won). The games will be coded to ensure that those in the high envy condition lose the last round and those in the low envy win the last round. To mirror the original study, I will have a virtual scoreboard present throughout the study that shows the winner and loser of the game and their monetary standings. Following the game, the participants will fill out various measures to analyze their dispositional envy (using the DSES measure), social desirability (using BIDR measure), their state emotions (*"I am a little jealous of that person", "I envy the other person."*), thoughts about the attributes of the game [i.e., their skill, their luck, the task difficulty, their ability/effort(*"The outcome of the situation was unjust.", "The outcome of the situation was uncontrollable."*)], and whether or not they thought they could have won the game (*"What do you attribute your result in the rock-paper-scissors game to?"*). All of these measures are scaled on a 7-point Likert scale other than the attribution of the outcome measure which is a 4-option forced choice scale. Throughout the survey, there will attention and comprehension checks to ensure that the participants are paying attention. After all of the measures, the participants will be debriefed about the deception and given an equal amount as those in the low envy condition (i.e., those who won the game).  
 
 
-Smith, R. H., & Kim, S. H. (2007). Comprehending envy. Psychological Bulletin, 133(1), 46-64. https://doi.org/10.1037/0033-2909.133.1.46
+This study should require around 68 participants. There was a medium to large effect size (*d*=0.68), so with an alpha of 0.05 and beta of 0.80, a reasonable sample size would be 68. While I have not completely coded up the survey yet to fully test the amount of time it would take to complete the study, I would estimate it should take around 15 minutes to complete the game and all of the measures.  
 
+**Notes**: 
+1) The monetary incentive in the 2023 study was 10 euros, but I don't think we need to use that steep of a prize. In the past, Mike has used a dollar or so and was still able to find envy responses. Can we discuss the size of this amount once we have a better idea of the course's funds?  
+
+2) The measures can be found in the supplemental materials of a later study that used this method (Rentzsch et al., 2023). The 2023 study included more measures than the 2015 study I am replicating. I will double check with the Rentzsch, but the measures used in the 2015 should be found on tables 7 (DSES), 14 (BIDR), 27 (state emotions), 32 (appraisals about the situation), 37 (attribution of the outcome)
+
+Rentzsch, K., Giese, A.-K., Hebel, V., & Lösch, T. (2023). Personality and Emotions in Social Interactions – the PESI project. *Personality Science*, 4, 1-15. https://doi.org/10.5964/ps.8241
 
 
 ## Methods
+I will be replicating study 5 in Rentzsch and Gross's (2015) study that analyzes state envy following a social interaction. 
+
+The only inclusion criteria for this study will be fluency in English. The data collected from participants will be basic demographics, age and gender, and responses to the following scales -- dispositional envy (using the DSES measure), social desirability (using BIDR measure), their state emotions, appraisals of the situation, and outcome attribution. Other than the outcome attribution measure which is a 4-point scale, all other data uses a 7-point likert scale. Participants with missing data on key variables or who fail attention checks will be excluded. Scale scores (DSES, BIDR, state emotions, appraisals, outcome attributions) will be computed as the median of the corresponding items after reverse coding where applicable. The manipulation variable will be dummy coded: 0 = winner (low envy condition), 1 = loser (high envy condition).
+
+The main confirmatory test will be an independent-samples t-test comparing state envy between winners and losers. This directly tests the hypothesis that people will envy those who receive a reward when they do not, consistent with the original study. Assumptions of normality and homogeneity of variances will be checked before analysis.
+
+Original findings: participants who lost (did not receive reward) reported higher envy (*M* = 2.00, *SD* = 1.08) than winners (received reward) (*M* = 1.31, *SD* = 0.89), *t*(57) = 2.67, *p* = 0.01. Successful replication would reproduce this effect in the same direction and similar magnitude.
+
+
+### Reliability and Validity 
+What is the key construct?  
+
+The key construct measured is envy.
+        
+What is the measure?  
+
+Envy is being measured with an Emotional Experiences scale (Rentzsch & Gross, 2015). They have other variables being evaluated using different measures, but this is the measure that the state envy analysis relies on.
+     
+Is any reliability evidence shared or cited? Do they mention reliability?
+
+Reliability for the measures was shared using Chronbach's alpha. This measure assesses the internal reliability of items within the scales. All αs > 0.62 showing that there was a large internal reliability of items within the scales.
+     
+Is any validity evidence shared or cited? What sort of validity?
+
+This task was shown to have external validity on increasing envy through convergent validity. State envy increases for losers of the game correlated strongly with dispositional envy. This means that those who have higher rates of envy on average had increases in envy following the loss in the game. 
+
+
 
 ### Power Analysis
 
