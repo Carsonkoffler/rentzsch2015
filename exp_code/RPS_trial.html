@@ -1,0 +1,593 @@
+<!-- rock paper scissors practice experiment -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Replication Experiment</title>
+
+  <!-- jsPsych core + plugins -->
+  <script src="https://unpkg.com/jspsych@8.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-likert@2.0.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@2.1.0"></script>
+  <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" />
+</head>
+
+<body></body>
+
+<script>
+  // Initialize jsPsych
+  var jsPsych = initJsPsych({
+    on_finish: function() {
+      jsPsych.data.displayData();
+    }
+  });
+
+  var timeline = [];
+  let participantName = "";
+
+  // --- Preload images ---
+  var preload = {
+    type: jsPsychPreload,
+    images: [
+      'images/Rock_Participant.png',
+      'images/Rock_Computer.png',
+      'images/Paper_Participant.png',
+      'images/Paper_Computer.png',
+      'images/Scissors_Participant.png',
+      'images/Scissors_Computer.png',
+      'images/loading_icon.gif'
+    ]
+  };
+  timeline.push(preload);
+
+
+  // --- Welcome message ---
+  var welcome = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "Welcome to the experiment. Press any key to begin." //put the consent prompt here 
+  };
+  timeline.push(welcome);
+
+  var consent ={
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "<h2> Do you consent to participate in this study? </h2> <p> By clicking 'I Consent', you agree to participate in this study understanding that your participation is voluntary and you can withdraw at any time without penalty. Your data will be kept confidential and used solely for research purposes. </p>",
+    choices: ['I Consent', 'I Do Not Consent'],
+    data: { task: 'consent' },
+    on_finish: function(data){
+      if(data.response === 1){
+        jsPsych.data.addProperties({ reason: "participant_declined_consent" }); //log reason for non-consent
+        
+        document.body.innerHTML = `
+        <div style="text-align:center; margin-top:100px;">
+          <h3>You have chosen not to participate in this study.</h3>
+          <p>Thank you for your time. You may now close this window.</p>
+          <p>You will be automatically redirected in 5 seconds.</p>
+        </div>
+      `;
+
+      // delay redirect
+      setTimeout(function() {
+        window.location.href = "https://irb.ucsd.edu/participants/index.html";
+      }, 5000);
+
+      // return false prevents jsPsych from continuing the timeline
+      return false;
+    }
+  }
+};
+
+  timeline.push(consent);
+  // get participant name/Psuedonym here if desired
+  var participant_name = {
+    type: jsPsychSurveyText,
+    questions: [
+      { prompt: `Please enter your name or a pseudonym to use during the game. <br><i>If you decide to use a pseudonym, we ask that you pick something respectful to the other player</i>.`, required: true }
+  ],
+  button_label: "Continue",
+  on_finish: function(data){
+    participantName = data.response.Q0;
+    jsPsych.data.addProperties({ participant_name: participantName });
+  }
+  };
+  timeline.push(participant_name);
+
+
+    function computer_name() {
+    var x = Math.floor(Math.random() * 5) + 1;
+    if (x === 1) return "Megan";
+    else if (x === 2) return "Bria";
+    else if (x === 3) return "Thomas";
+    else return "Jonathon";
+  };
+  const computerName = computer_name();
+  // let participant chose an avatar too? 
+
+  //explain the rules of the game here 
+  var instructions = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+      <h2>Instructions</h2>
+      <p>For this experiment, you will be randomly paired with another participant to play a game of rock, paper, scissors.</p>
+      <p>You will first complete three practice rounds to get familiar with the game interface.</p>
+      <p>After you select your move, there will be a short countdown before both choices are revealed.</p>
+      <p>The rules are simple:</p>
+      <ol style ="list-style-type=decimal; list-style-position:inside;padding-left:0; display=inline-block;">
+        <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li>
+      </ol>
+      <p>No points will be rewarded for the practice round. After three rounds, the main game will begin. The winner of the main game will receive a monetary reward of $XX.</p>
+      <p>Press any key to begin the practice rounds.</p>
+    `
+  };
+  timeline.push(instructions);
+
+    var pairing_intro = {
+    type: jsPsychHtmlKeyboardResponse,
+    choices: "NO KEYS",
+    stimulus: `<div style="text-align:center;">
+               <p><b>...Pairing...</b></p>
+               <p style = "font-size:small"> Finding partner to pair you with </p>
+               <img src ="images/loading_icon.gif" width='100' alt='Loading...'>
+               </div>
+               `, 
+    trial_duration: 2000 // 2 second delay to simulate pairing process
+    };
+    timeline.push(pairing_intro);
+
+  var introductions = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `<p>Your opponent for this game is <b>${computerName}</b>. Good luck!</p>
+               <p>Press any key to continue.</p>`
+  };
+  timeline.push(introductions);
+
+  // --- Game setup ---
+  var participant_images = {
+    'Rock': 'images/Rock_Participant.png',
+    'Paper': 'images/Paper_Participant.png',
+    'Scissors': 'images/Scissors_Participant.png'
+  };
+
+  var computer_images = {
+    'Rock': 'images/Rock_Computer.png',
+    'Paper': 'images/Paper_Computer.png',
+    'Scissors': 'images/Scissors_Computer.png'
+  };
+
+  var choices = ['Rock', 'Paper', 'Scissors'];
+
+  function determineWinner(player, computer) {
+    if (player === computer) return "tie";
+    if (
+      (player === "Rock" && computer === "Scissors") ||
+      (player === "Paper" && computer === "Rock") ||
+      (player === "Scissors" && computer === "Paper")
+    ) return "player";
+    return "computer";
+  }
+
+  // --- 3 practice rounds ---
+  for (let i = 0; i < 3; i++) {
+
+    // Player choice screen
+    let player_choice = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: `<p><b>Round ${i + 1}</b><br>Choose your move:</p>`,
+      choices: [
+        `<img src='${participant_images["Rock"]}' width='300'>`,
+        `<img src='${participant_images["Paper"]}' width='300'>`,
+        `<img src='${participant_images["Scissors"]}' width='300'>`
+      ],
+      data: { round: i + 1 },
+      on_finish: function(data) {
+        let choice_index = data.response;
+        data.player_choice = choices[choice_index];
+      }
+    };
+
+    // Other participant choice delay 
+    let computer_delay = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `<p>Waiting for ${computerName} to choose...</p>`,
+      choices: "NO_KEYS",
+      trial_duration: Math.floor(Math.random() * 1000) + 1000 // random delay between 1-2 seconds
+    };
+
+    // Countdown screen
+    let delay_before_reveal = {
+      type: jsPsychHtmlKeyboardResponse,
+      stimulus: `<p style="font-size:48px; font-weight:bold;">3...</p>`,
+      choices: "NO_KEYS", // disable keypresses
+      trial_duration: 3200, // total duration of countdown ~ 3 seconds
+      on_load: function() {
+        const display = document.querySelector('.jspsych-content');
+        setTimeout(() => display.innerHTML = `<p style="font-size:48px; font-weight:bold;">2...</p>`, 1000);
+        setTimeout(() => display.innerHTML = `<p style="font-size:48px; font-weight:bold;">1...</p>`, 2000);
+        setTimeout(() => display.innerHTML = `<p style="font-size:48px; color:green; font-weight:bold;">Go!</p>`, 2800);
+      }
+    };
+
+    // Show results
+    let show_result = {
+      type: jsPsychHtmlKeyboardResponse,
+      choices: "ALL_KEYS",
+      stimulus: function() {
+        let last_trial = jsPsych.data.get().last(3).values()[0]; //get player choice 3 trials back
+        let player = last_trial.player_choice;
+        let computer = jsPsych.randomization.sampleWithoutReplacement(choices, 1)[0];
+        let result = determineWinner(player, computer);
+
+        jsPsych.data.addDataToLastTrial({
+          computer_choice: computer,
+          result: result
+        });
+
+        let html = `
+          <div style="display:flex; justify-content:center; align-items:center; gap:60px;">
+            <div style="text-align:center;">
+              <p><b>${participantName} chose:</b></p>
+              <img src='${participant_images[player]}' width='300'>
+            </div>
+            <div style="text-align:center;">
+              <p><b>${computerName} chose:</b></p>
+              <img src='${computer_images[computer]}' width='300'>
+            </div>
+          </div>
+        `;
+
+        if (result === "tie") {
+          html += `<p style="font-size:24px;"><b>It's a tie!</b></p>`;
+        } else if (result === "player") {
+          html += `<p style="font-size:24px; color:green;"><b>${participantName} wins this round!</b></p>`;
+        } else {
+          html += `<p style="font-size:24px; color:red;"><b>${computerName} wins this round!</b></p>`;
+        }
+
+        html += `<p style='font-size:small;'>Press any key to continue.</p>`;
+        return html;
+      }
+    };
+
+    timeline.push(player_choice, computer_delay, delay_before_reveal, show_result);
+  }
+
+  // End message
+  var end_message = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+      <p><b>Practice rounds complete!</b></p>
+      <p>Press any key to continue to the main game.</p>
+    `
+  };
+  timeline.push(end_message);
+
+  //real round for money would go here: 
+    // need to randomly place participant in winner and loser conditions
+    //scoreboard will go here too
+    var main_game_instructions = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `
+        <h2>Main Game Instructions</h2>
+        <p>You will now proceed to the main game of Rock-Paper-Scissors against ${computerName}.</p>
+        <p>The rules remain the same, but this the winner of the round will receive a reward of XXX.</p>
+        <p>If there is a tie, the round will be replayed until there is a winner.</p>
+        <p style = font-size: small> The rules are below in case you forgot: </p>
+        <ol style ="list-style-type=decimal; list-style-position:inside;padding-left:0; display=inline-block;">
+            <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li>
+        <p>Good luck!</p>
+        <p style= "font-size:small"><i>Press any key to begin the main game.</i></p>
+        `
+    };
+    timeline.push(main_game_instructions);
+
+    //create random assignment to conditions 
+    var random_condition = jsPsych.randomization.sampleWithoutReplacement(['winner', 'loser'], 1)[0];
+    jsPsych.data.addProperties({random_condition: random_condition});
+    
+    //main game code below 
+    var main_game = {
+    timeline: [
+
+        // Player makes a choice
+        {
+        type: window.jsPsychHtmlButtonResponse,
+        stimulus: `<p><b>Main Game</b><br>Choose your move:</p>`,
+        choices: [
+            `<img src='${participant_images["Rock"]}' width='300'>`,
+            `<img src='${participant_images["Paper"]}' width='300'>`,
+            `<img src='${participant_images["Scissors"]}' width='300'>`
+        ],
+        on_finish: function(data) {
+            data.player_choice = choices[data.response];
+        }
+        },
+        // Waiting screen for other participant
+        {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `<p>Waiting for ${computerName} to choose...</p>`,
+        choices: "NO_KEYS",
+        trial_duration: Math.floor(Math.random() * 1000) + 1000 // random delay between 1-2 seconds
+        },
+        // Reuse countdown
+        {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `<p style="font-size:48px; font-weight:bold;">3!</p>`,
+        choices: "NO_KEYS", // disable keypresses
+        trial_duration: 3200, // total duration of countdown ~ 3 seconds
+        on_load: function() {
+            const display = document.querySelector('.jspsych-content');
+            setTimeout(() => display.innerHTML = `<p style="font-size:48px; font-weight:bold;">2!</p>`, 1000);
+            setTimeout(() => display.innerHTML = `<p style="font-size:48px; font-weight:bold;">1!</p>`, 2000);
+            setTimeout(() => display.innerHTML = `<p style="font-size:48px; color:green; font-weight:bold;">Go!</p>`, 2800);
+        }
+        },
+
+        // Show result (with manipulation)
+        {
+        type: jsPsychHtmlKeyboardResponse,
+        choices: "ALL_KEYS",
+        stimulus: function() {
+            let last_trial = jsPsych.data.get().last(3).values()[0];
+            let player = last_trial.player_choice;
+            let computer;
+            let result;
+
+            // --- Manipulate outcome based on condition ---
+            if (random_condition === "win") { //create win condition such that participant always wins
+            if (player === "Rock") computer = "Scissors";
+            else if (player === "Paper") computer = "Rock";
+            else computer = "Paper";
+            result = "player";
+            } else { //create lose condition such that participant always loses
+            if (player === "Rock") computer = "Paper";
+            else if (player === "Paper") computer = "Scissors";
+            else computer = "Rock";
+            result = "computer";
+            }
+
+            // Save data
+            jsPsych.data.addDataToLastTrial({
+            computer_choice: computer,
+            result: result
+            });
+
+            if (result === "player"|| result === "computer") {
+                 setTimeout(() => {
+                 confetti({
+                 particleCount: 150,
+                 spread: 100,
+                 origin: { y: 0.6 }
+                 });
+      }, 200); // small delay to sync with reveal
+    }
+            // Display results 
+            let html = `
+            <div style="display:flex; justify-content:center; align-items:center; gap:60px;">
+                <div style="text-align:center;">
+                <p><b>${participantName} chose:</b></p>
+                <img src='${participant_images[player]}' width='300'>
+                </div>
+                <div style="text-align:center;">
+                <p>${computerName} chose:</b></p>
+                <img src='${computer_images[computer]}' width='300'>
+                </div>
+            </div>
+            `;
+            //title results 
+            if (result === "player") {
+            html += `<p style="font-size:24px; color:green;"><b>${participantName} wins this round!</b> ${participantName} wins $XX.</p>`;
+            } else {
+            html += `<p style="font-size:24px; color:red;"><b>${computerName} wins this round!</b> Player 2 wins $XX.</p>`;
+            }
+
+            html += `<p style='font-size:small;'>Press any key to continue.</p>`;
+            return html;
+        }
+        },
+        // create the scoreboard here to show someone earning money 
+        {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: function() {
+            let last_trial = jsPsych.data.get().last(1).values()[0];
+            let result = last_trial.result;
+            let html = `<h2>Scoreboard</h2><p>${participantName}'s Earnings: `;
+            if (result === "player") {
+            html += "$XX</p>";
+            } else {
+            html += "$0</p>";
+            }
+            html += `<p>Press any key to continue.</p>`;
+            return html;
+        }
+        }
+        
+    ],
+
+    // Replay if a tie ever occurs
+    loop_function: function() {
+        let last_result = jsPsych.data.get().last(1).values()[0].result;
+        return last_result === "tie";
+    },
+    };
+
+    timeline.push(main_game);
+
+
+
+    var attention_check = {
+    type: window.jsPsychHtmlButtonResponse, 
+    stimulus: "<p>Who won the last round you played?</p>", 
+    choices: ['You', `${computerName}`, 'It was a tie']
+    };
+    timeline.push(attention_check);
+
+  //measures for manipulation check and demographics would go here
+    var appraisal_of_situation = {
+        type: jsPsychSurveyLikert,
+        preamble: "<h3> Please answer the following questions honestly. There are no right or wrong answers. </h3>",
+        questions: [
+            {prompt: "", labels: ["The outcome was unfair to me.", "", "", "","","", "The outcome was fair to me."], required: true},
+            {prompt: "", labels: ["The outcome of the situation was unjust.", "", "", "","","", "The outcome of the situation was just."], required: true}, 
+            {prompt: "", labels: ["The other person deserved the outcome of the situation.", "", "", "","","", "The other person did not deserve the outcome of the situation."], required: true}, 
+            {prompt: "", labels: ["The outcome of the situation was unfavorable to me.", "", "", "","","", "The outcome of the situation was favorable to me."], required: true}, 
+            {prompt: "", labels: ["The outcome of the situation was important to me.", "", "", "","","", "The outcome of the situation was not important to me."], required: true}, 
+            {prompt: "", labels: ["I deserved the outcome of the situation.", "", "", "","","", "I did not deserve the outcome of the situation."], required: true}, 
+            {prompt: "", labels: ["The outcome of the situation was pleasant for me.", "", "", "","","", "The outcome of the situation was unpleasant for me."], required: true}, 
+            {prompt: "", labels: ["The outcome of the situation was uncontrollable.", "", "", "","","", "The outcome of the situation was controllable."], required: true}, 
+            {prompt: "", labels: ["The outcome of the situation could have been different", "", "", "","","", "The outcome of the situation could not have been different."], required: true},
+            {prompt: "", labels: ["The reward is attractive.", "", "", "","","", "The reward is unattractive."], required: true}
+        ], 
+        scale_width: 600,
+        button_label: "Continue."
+    }
+    timeline.push(appraisal_of_situation);
+
+    var state_emotions = {
+    type: jsPsychSurveyLikert,
+    preamble: "<h3> Filler </h3>",
+    questions: [
+        {prompt: "I am satisfied with myself.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I am a little jealous of that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I admire that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I feel worthless.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I envy that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I feel resentment.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true}, 
+        {prompt: "I feel jealousy.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true}, 
+        {prompt: "I feel shame.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I feel envy.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+    ], 
+    scale_width: 600,
+    button_label: "Continue."
+    };
+    timeline.push(state_emotions);
+
+    var outcome_attribution = {
+    type: jsPsychSurveyMultiChoice,
+    questions: [
+        {
+        prompt: "What do you attribute your result in the rock-paper-scissors game to? <i> Please choose only one of the four answer options!</i>",
+        options: [
+            "My luck during the game.", 
+            "The difficulty of the task.",
+            "The other player's skill level.",
+            "The other person's effort during the game."
+        ], 
+        required: true, 
+        button_label: "Continue."
+        }
+    ],
+    }
+    timeline.push(outcome_attribution);
+
+    var BIDR = {
+    type: jsPsychSurveyLikert,
+    preamble: "<h3> filler </h3>",
+    questions: [
+        {prompt: "The first impression I get of other people usually turns out to be true.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I haven't always been honest with myself.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I always know why I like something.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I find it difficult to push disturbing thoughts aside.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "Sometimes I miss out on something because I simply can't make up my mind quickly enough.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I am a completely rational thinker.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I rarely tolerate criticism.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I am very confident in my judgments.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I have occasionally doubted my abilities as a lover.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I don't always know the reasons for my actions.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I sometimes tell lies when I have to.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "There have been times when I have taken advantage of someone.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I never swear.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "Sometimes I prefer to get even with others than forgive and forget.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I have taken too much change without telling the salesperson.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I always declare everything I have to declare at customs.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "Sometimes I drive faster than the speed limit.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I have done things that I don't tell others about.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I never take things that don't belong to me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I have skipped work or school because of a 'supposed' illness.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+    ], 
+    scale_width: 600,
+    button_label: "Continue."
+    };
+    timeline.push(BIDR);
+
+    var DSES = {
+    type: jsPsychSurveyLikert,
+    preamble: "<h3> filler </h3>",
+    questions: [
+        {prompt: "It bothers me when people seem to be able to have any partner they want.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It's hard to bear when other people are more intelligent than me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It bothers me when others have things that I can't have.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It makes me uncomfortable when others are more attractive than me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It bothers me when others can express themselves better than I can.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It's hard for me to bear when others can buy everything they want.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It consumes me when others are more popular than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It bothers me when people are more creative than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It torments me when others have better technical equipment than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It bothers me when people get along better with others than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It gnaws at me when when others grasp a situation faster than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It's hard for me to bear when others have a fuller wardrobe than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It eats away at me when people are more popular with others than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It bothers me when others have more general knowledge than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It gnaws at me when others live in a better neighborhood than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+    ], 
+    scale_width: 600,
+    button_label: "Continue."
+    };
+    timeline.push(DSES);
+
+    //demographics here 
+    var gender_question = {
+    type: jsPsychSurveyMultiChoice,
+    questions: [
+        {
+        prompt: "What is your gender?",
+        options: [
+            "Male", "Female", "Non-binary", "Other", "Prefer not to say"
+        ], 
+        required: true, 
+        button_label: "Continue."
+        }
+    ],
+    };
+    timeline.push(gender_question);
+
+    var age_question = {
+    type: jsPsychSurveyText,
+    questions: [
+        { prompt: "What is your age?", required: true }
+    ],
+    button_label: "Continue."
+    };
+    timeline.push(age_question);
+
+    //debrief here 
+    var debrief = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: "debrief filler", 
+    };
+    timeline.push(debrief);
+
+
+  // Run the experiment
+jsPsych.run(timeline);
+
+/* To do: 
+- remove people who don't consent from data <-- DONE
+- Adjust monetary amounts in instructions and results
+- Add a scoreboard for main game rounds
+- Make the scoreboard present throughout the surveys 
+- Test the full experiment for any bugs or issues (SEND TO RAS)
+- Collect data elsewhere besides just displaying at the end
+- Style the experiment to look nicer 
+    - make images display 'rock', 'paper', 'scissors' when hovered over
+    - center images on different display sizes 
+*/ 
+
+</script>
+</html>
+
+
