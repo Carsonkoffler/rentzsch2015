@@ -616,8 +616,17 @@
         <p>We were interested in games with low external control influences feelings of envy. You played a rock, paper, scissors with another participant and either won a reward or not. Following this, you responded to emotion assessments regarding how you felt towards the person you played rock, paper, scissors with.
         <p>If other people knew the true purpose of the study, it might affect how they behave/answer questions, so we are asking you not to share the information we just discussed. </p><br>
         <p>Thank you for your participation!</p><br>
-        <p style = "font-size:small"><i>Press any key to finish.</i></p>
-    `
+        <p style = "font-size:small"><i>You may now close the tab.</i></p>
+    `, 
+      choices: "NO_KEYS",       // prevent manual advancement
+    trial_duration: 5000,     // display for 5 seconds
+    on_finish: function() {
+        window.location.href = "about:blank";  // redirect to a blank page
+      }
+    };
+
+      // return false prevents jsPsych from continuing the timeline
+      return false;
     };
     timeline.push(debrief);
 
