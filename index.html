@@ -638,6 +638,7 @@
     filename: filename,
      data_string: () => jsPsych.data.get().csv()  // now includes subject_id column
     };
+  timeline.push(save_data)
 
   // Run the experiment
 jsPsych.run(timeline);
