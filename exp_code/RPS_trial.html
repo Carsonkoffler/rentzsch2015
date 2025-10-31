@@ -15,22 +15,41 @@
   <script src="https://unpkg.com/@jspsych/plugin-survey-text@2.0.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
   <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" />
 </head>
 
-<body></body>
+<body>
+    <div id="scoreboard" style="
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: blue;
+        border: 2px solid black;
+        border-radius: 8px;
+        padding: 10px;
+        color: white;
+        font-family: sans-serif;
+        z-index: 1000;">
+        <strong>Player Earnings</strong><br>
+        You: <span id="player-score">0</span><br>
+        <span id="opponent-label">Opponent</span>: <span id="computer-score">0</span>
+    </div>
+</body>
 
 <script>
   // Initialize jsPsych
-  var jsPsych = initJsPsych({
-    on_finish: function() {
-      jsPsych.data.displayData();
-    }
-  });
+  var jsPsych = initJsPsych();
 
   var timeline = [];
   let participantName = "";
 
+    // Generate random subject ID for data filename
+    const subject_id = jsPsych.randomization.randomID(10);
+    jsPsych.data.addProperties({ subject_id: subject_id });
+    const filename = `${subject_id}.csv`;
+            
   // --- Preload images ---
   var preload = {
     type: jsPsychPreload,
@@ -47,16 +66,17 @@
   timeline.push(preload);
 
 
-  // --- Welcome message ---
-  var welcome = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: "Welcome to the experiment. Press any key to begin." //put the consent prompt here 
-  };
-  timeline.push(welcome);
+//consent form
 
   var consent ={
     type: jsPsychHtmlButtonResponse,
-    stimulus: "<h2> Do you consent to participate in this study? </h2> <p> By clicking 'I Consent', you agree to participate in this study understanding that your participation is voluntary and you can withdraw at any time without penalty. Your data will be kept confidential and used solely for research purposes. </p>",
+    stimulus: `
+    <p style = "text-align: start; margin-right: 50px; margin-left: 50px"> You are being invited to participate in a research study titled “Reproducibility of Psychological Science and Instruction.”<br><br>This study is being done by Dr. Bria Long from UC San Diego and associated graduate students in Experimental Methods course.<br><br>You were selected to participate in this study because you are an adult in the U.S. and have been a represented population in previous psychology studies.
+    The purpose of this study is to better understand how well previously published studies in the psychological field replicate online and with different populations. Your participation in this research should last approximately 5-30 minutes  If you agree to take part in this study, you may be asked to view a set of stimuli, including pictures, sounds, written text, or videos and then giving some responses via key-presses, verbally, or with paper-and-pencil. We may also observe your choices or preferences among an array of stimuli.  These stimuli will be taken directly from or closely adapted from studies that already exist in the published psychological literature. Stimuli will include, e.g., pictures of objects and human faces, audio and video clips, short text passages, etc. None of the stimuli will be disturbing, threatening, or offensive. The online and in-person experiments described in this protocol will take no more than 30 minutes. An example game you might play would be to click on an image on the screen that matches a word you hear being said out loud. Your total expected time commitment for this study is between 5-30 minutes, and is specified in the study description.
+    Your participation in this study is completely voluntary and you can withdraw at any time. Choosing not to participate or withdrawing will result in no penalty or loss of benefits to which you are entitled. You are free to skip any question that you choose.
+    We will not be asking for any personally identifying information, and we will handle responses as confidentially as possible. Your SONA or Prolific IDs will never be tied to your responses on this survey. However, we cannot guarantee the confidentiality of information transmitted over the Internet. To minimize this risk, data containing anything that might be personally identifiable (e.g. Prolific IDs or IP addresses) will be encrypted on transfer and storage and will only be accessible to qualified lab personnel. We will be keeping data collected as part of this experiment indefinitely. This anonymized data (containing neither Prolific IDs nor IP addresses) may be shared with the scientific community or with other participants to be used as stimuli in future studies.<br><br>
+    If you have questions about this project or if you have a research-related problem, you may contact the researcher(s),  Dr. Bria Long, brlong@ucsd.edu. If you have any questions concerning your rights as a research subject, you may contact the UC San Diego Office of IRB Administration at irb@ucsd.edu or 858-246-4777. <br><br>
+    By participating in this research you are indicating that you are at least 18 years old, have read this consent form, and agree to participate in this research study. Please keep this consent form for your records. </p>`,
     choices: ['I Consent', 'I Do Not Consent'],
     data: { task: 'consent' },
     on_finish: function(data){
@@ -67,7 +87,7 @@
         <div style="text-align:center; margin-top:100px;">
           <h3>You have chosen not to participate in this study.</h3>
           <p>Thank you for your time. You may now close this window.</p>
-          <p>You will be automatically redirected in 5 seconds.</p>
+          <p>Or, you will be automatically redirected in 5 seconds.</p>
         </div>
       `;
 
@@ -106,22 +126,27 @@
     else return "Jonathon";
   };
   const computerName = computer_name();
-  // let participant chose an avatar too? 
+
+  // When the page loads, update the opponent label
+    document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("opponent-label").textContent = computerName;
+    });
 
   //explain the rules of the game here 
   var instructions = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
       <h2>Instructions</h2>
-      <p>For this experiment, you will be randomly paired with another participant to play a game of rock, paper, scissors.</p>
-      <p>You will first complete three practice rounds to get familiar with the game interface.</p>
-      <p>After you select your move, there will be a short countdown before both choices are revealed.</p>
-      <p>The rules are simple:</p>
-      <ol style ="list-style-type=decimal; list-style-position:inside;padding-left:0; display=inline-block;">
+      <p style = "text-align: start">For this experiment, you will be randomly paired with another participant to play a game of rock, paper, scissors.</p>
+      <p style = "text-align: start">You will first complete three practice rounds to get familiar with the game interface.</p>
+      <p style = "text-align: start">The rules of the game are simple:</p>
+      <ol style ="list-style-type=decimal; list-style-position:inside;padding-left:0; display=inline-block; text-align: start">
         <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li>
       </ol>
-      <p>No points will be rewarded for the practice round. After three rounds, the main game will begin. The winner of the main game will receive a monetary reward of $XX.</p>
-      <p>Press any key to begin the practice rounds.</p>
+      <p style = "text-align: start">After you select your move, there will be a short countdown before both choices are revealed.</p>
+      <p style = "text-align: start">No points will be rewarded for the practice round. After three rounds, the real round of rock, paper, scissors will begin.</p>
+      <p style = "text-align: start"><b>The winner of the final round will receive a monetary reward of $XX.</b></p>
+      <p style = "text-align: start"><i>Press any key to begin the practice rounds.</i></p>
     `
   };
   timeline.push(instructions);
@@ -131,8 +156,8 @@
     choices: "NO KEYS",
     stimulus: `<div style="text-align:center;">
                <p><b>...Pairing...</b></p>
-               <p style = "font-size:small"> Finding partner to pair you with </p>
-               <img src ="images/loading_icon.gif" width='100' alt='Loading...'>
+               <p style = "font-size:small"> Finding a partner to pair you with </p>
+               <img src ="images/loading_icon.gif" width='200' alt='Loading...'>
                </div>
                `, 
     trial_duration: 2000 // 2 second delay to simulate pairing process
@@ -257,14 +282,16 @@
   }
 
   // End message
-  var end_message = {
-    type: jsPsychHtmlKeyboardResponse,
+  var cognition_check = {
+    type: jsPsychHtmlButtonResponse,
     stimulus: `
-      <p><b>Practice rounds complete!</b></p>
-      <p>Press any key to continue to the main game.</p>
-    `
+      <h1 style = "text-align: center"><b>Practice rounds complete!</b></h1>
+      <p style = "text-align: start">Now that you have finished the practice rounds, do you feel like you understand how to play Rock, Paper, Scissors?</p>
+      <p style = "text-align: start">If not, the instructions will be displayed again before the main game.</p>
+    `, 
+    choices: ['Yes', 'No']
   };
-  timeline.push(end_message);
+  timeline.push(cognition_check);
 
   //real round for money would go here: 
     // need to randomly place participant in winner and loser conditions
@@ -272,16 +299,20 @@
     var main_game_instructions = {
         type: jsPsychHtmlKeyboardResponse,
         stimulus: `
-        <h2>Main Game Instructions</h2>
-        <p>You will now proceed to the main game of Rock-Paper-Scissors against ${computerName}.</p>
-        <p>The rules remain the same, but this the winner of the round will receive a reward of XXX.</p>
-        <p>If there is a tie, the round will be replayed until there is a winner.</p>
-        <p style = font-size: small> The rules are below in case you forgot: </p>
-        <ol style ="list-style-type=decimal; list-style-position:inside;padding-left:0; display=inline-block;">
+        <h2>Final Round Instructions</h2>
+        <p style = "text-align: start">You will now proceed to the <b>final round</b> of Rock-Paper-Scissors against ${computerName}.</p>
+        <p style = "text-align: start">Remember the winner of the round will receive a reward of XXX.</p>
+        <p style = "text-align: start">If there is a tie, the round will be replayed until there is a winner.</p>
+        <p style = "text-align: start"> The rules are below in case you forgot: </p>
+        <ol style ="list-style-type=decimal; list-style-position:inside;padding-left:0; display=inline-block; text-align: start">
             <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li>
-        <p>Good luck!</p>
-        <p style= "font-size:small"><i>Press any key to begin the main game.</i></p>
-        `
+        <p style = "text-align: start">Good luck!</p>
+        <p style= "font-size:small; text-align:start"><i>Press any key to begin the main game.</i></p>
+        `, 
+        on_finish: function() {
+            // show scoreboard
+            document.getElementById('scoreboard').style.display = 'block';
+        }
     };
     timeline.push(main_game_instructions);
 
@@ -316,13 +347,13 @@
         // Reuse countdown
         {
         type: jsPsychHtmlKeyboardResponse,
-        stimulus: `<p style="font-size:48px; font-weight:bold;">3!</p>`,
+        stimulus: `<p style="font-size:48px; font-weight:bold;">3...</p>`,
         choices: "NO_KEYS", // disable keypresses
         trial_duration: 3200, // total duration of countdown ~ 3 seconds
         on_load: function() {
             const display = document.querySelector('.jspsych-content');
-            setTimeout(() => display.innerHTML = `<p style="font-size:48px; font-weight:bold;">2!</p>`, 1000);
-            setTimeout(() => display.innerHTML = `<p style="font-size:48px; font-weight:bold;">1!</p>`, 2000);
+            setTimeout(() => display.innerHTML = `<p style="font-size:48px; font-weight:bold;">2...</p>`, 1000);
+            setTimeout(() => display.innerHTML = `<p style="font-size:48px; font-weight:bold;">1...</p>`, 2000);
             setTimeout(() => display.innerHTML = `<p style="font-size:48px; color:green; font-weight:bold;">Go!</p>`, 2800);
         }
         },
@@ -338,7 +369,7 @@
             let result;
 
             // --- Manipulate outcome based on condition ---
-            if (random_condition === "win") { //create win condition such that participant always wins
+            if (random_condition === "winner") { //create win condition such that participant always wins
             if (player === "Rock") computer = "Scissors";
             else if (player === "Paper") computer = "Rock";
             else computer = "Paper";
@@ -355,16 +386,22 @@
             computer_choice: computer,
             result: result
             });
-
-            if (result === "player"|| result === "computer") {
-                 setTimeout(() => {
-                 confetti({
-                 particleCount: 150,
-                 spread: 100,
-                 origin: { y: 0.6 }
-                 });
-      }, 200); // small delay to sync with reveal
-    }
+            // Trigger confetti around the winner's side
+            setTimeout(() => {
+                if (result === "player") {
+                    confetti({
+                        particleCount: 150,
+                        spread: 100,
+                        origin: { x: 0.25, y: 0.6 } // left side (player)
+                    });
+                } else if (result === "computer") {
+                    confetti({
+                        particleCount: 150,
+                        spread: 100,
+                        origin: { x: 0.75, y: 0.6 } // right side (computer)
+                    });
+                }
+            }, 200);
             // Display results 
             let html = `
             <div style="display:flex; justify-content:center; align-items:center; gap:60px;">
@@ -385,6 +422,18 @@
             html += `<p style="font-size:24px; color:red;"><b>${computerName} wins this round!</b> Player 2 wins $XX.</p>`;
             }
 
+            
+            //change scoreboard with currency earnings here 
+            if (result === "player") {
+                let playerScoreEl = document.getElementById('player-score');
+                let current = parseFloat(playerScoreEl.textContent.replace('$', '')) || 0;
+                playerScoreEl.textContent = `$${(current + 5).toFixed(2)}`;} 
+                else if (result === "computer") {
+                    let computerScoreEl = document.getElementById('computer-score');
+                    let current = parseFloat(computerScoreEl.textContent.replace('$', '')) || 0;
+                    computerScoreEl.textContent = `$${(current + 5).toFixed(2)}`;
+                }
+
             html += `<p style='font-size:small;'>Press any key to continue.</p>`;
             return html;
         }
@@ -395,7 +444,7 @@
         stimulus: function() {
             let last_trial = jsPsych.data.get().last(1).values()[0];
             let result = last_trial.result;
-            let html = `<h2>Scoreboard</h2><p>${participantName}'s Earnings: `;
+            let html = `<h2>Earnings</h2><p>${participantName}'s Earnings: `;
             if (result === "player") {
             html += "$XX</p>";
             } else {
@@ -407,12 +456,6 @@
         }
         
     ],
-
-    // Replay if a tie ever occurs
-    loop_function: function() {
-        let last_result = jsPsych.data.get().last(1).values()[0].result;
-        return last_result === "tie";
-    },
     };
 
     timeline.push(main_game);
@@ -431,16 +474,16 @@
         type: jsPsychSurveyLikert,
         preamble: "<h3> Please answer the following questions honestly. There are no right or wrong answers. </h3>",
         questions: [
-            {prompt: "", labels: ["The outcome was unfair to me.", "", "", "","","", "The outcome was fair to me."], required: true},
-            {prompt: "", labels: ["The outcome of the situation was unjust.", "", "", "","","", "The outcome of the situation was just."], required: true}, 
-            {prompt: "", labels: ["The other person deserved the outcome of the situation.", "", "", "","","", "The other person did not deserve the outcome of the situation."], required: true}, 
-            {prompt: "", labels: ["The outcome of the situation was unfavorable to me.", "", "", "","","", "The outcome of the situation was favorable to me."], required: true}, 
-            {prompt: "", labels: ["The outcome of the situation was important to me.", "", "", "","","", "The outcome of the situation was not important to me."], required: true}, 
-            {prompt: "", labels: ["I deserved the outcome of the situation.", "", "", "","","", "I did not deserve the outcome of the situation."], required: true}, 
-            {prompt: "", labels: ["The outcome of the situation was pleasant for me.", "", "", "","","", "The outcome of the situation was unpleasant for me."], required: true}, 
-            {prompt: "", labels: ["The outcome of the situation was uncontrollable.", "", "", "","","", "The outcome of the situation was controllable."], required: true}, 
-            {prompt: "", labels: ["The outcome of the situation could have been different", "", "", "","","", "The outcome of the situation could not have been different."], required: true},
-            {prompt: "", labels: ["The reward is attractive.", "", "", "","","", "The reward is unattractive."], required: true}
+            {prompt: "", labels: ["The outcome was unfair to me.", "", "", "","","", "The outcome was fair to me."], required: false},
+            {prompt: "", labels: ["The outcome of the situation was unjust.", "", "", "","","", "The outcome of the situation was just."], required: false}, 
+            {prompt: "", labels: ["The other person deserved the outcome of the situation.", "", "", "","","", "The other person did not deserve the outcome of the situation."], required: false}, 
+            {prompt: "", labels: ["The outcome of the situation was unfavorable to me.", "", "", "","","", "The outcome of the situation was favorable to me."], required: false}, 
+            {prompt: "", labels: ["The outcome of the situation was important to me.", "", "", "","","", "The outcome of the situation was not important to me."], required: false}, 
+            {prompt: "", labels: ["I deserved the outcome of the situation.", "", "", "","","", "I did not deserve the outcome of the situation."], required: false}, 
+            {prompt: "", labels: ["The outcome of the situation was pleasant for me.", "", "", "","","", "The outcome of the situation was unpleasant for me."], required: false}, 
+            {prompt: "", labels: ["The outcome of the situation was uncontrollable.", "", "", "","","", "The outcome of the situation was controllable."], required: false}, 
+            {prompt: "", labels: ["The outcome of the situation could have been different", "", "", "","","", "The outcome of the situation could not have been different."], required: false},
+            {prompt: "", labels: ["The reward is attractive.", "", "", "","","", "The reward is unattractive."], required: false}
         ], 
         scale_width: 600,
         button_label: "Continue."
@@ -451,15 +494,15 @@
     type: jsPsychSurveyLikert,
     preamble: "<h3> Filler </h3>",
     questions: [
-        {prompt: "I am satisfied with myself.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I am a little jealous of that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I admire that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I feel worthless.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I envy that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I feel resentment.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true}, 
-        {prompt: "I feel jealousy.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true}, 
-        {prompt: "I feel shame.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I feel envy.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "I am satisfied with myself.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I am a little jealous of that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I admire that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I feel worthless.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I envy that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I feel resentment.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false}, 
+        {prompt: "I feel jealousy.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false}, 
+        {prompt: "I feel shame.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I feel envy.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
     ], 
     scale_width: 600,
     button_label: "Continue."
@@ -473,11 +516,12 @@
         prompt: "What do you attribute your result in the rock-paper-scissors game to? <i> Please choose only one of the four answer options!</i>",
         options: [
             "My luck during the game.", 
-            "The difficulty of the task.",
+            "The difficulty of the task.</br>",
             "The other player's skill level.",
             "The other person's effort during the game."
         ], 
-        required: true, 
+        required: false,
+        horizontal: false, 
         button_label: "Continue."
         }
     ],
@@ -488,26 +532,26 @@
     type: jsPsychSurveyLikert,
     preamble: "<h3> filler </h3>",
     questions: [
-        {prompt: "The first impression I get of other people usually turns out to be true.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I haven't always been honest with myself.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I always know why I like something.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I find it difficult to push disturbing thoughts aside.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "Sometimes I miss out on something because I simply can't make up my mind quickly enough.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I am a completely rational thinker.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I rarely tolerate criticism.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I am very confident in my judgments.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I have occasionally doubted my abilities as a lover.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I don't always know the reasons for my actions.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I sometimes tell lies when I have to.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "There have been times when I have taken advantage of someone.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I never swear.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "Sometimes I prefer to get even with others than forgive and forget.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I have taken too much change without telling the salesperson.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I always declare everything I have to declare at customs.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "Sometimes I drive faster than the speed limit.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I have done things that I don't tell others about.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I never take things that don't belong to me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "I have skipped work or school because of a 'supposed' illness.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "The first impression I get of other people usually turns out to be true.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I haven't always been honest with myself.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I always know why I like something.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I find it difficult to push disturbing thoughts aside.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "Sometimes I miss out on something because I simply can't make up my mind quickly enough.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I am a completely rational thinker.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I rarely tolerate criticism.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I am very confident in my judgments.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I have occasionally doubted my abilities as a lover.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I don't always know the reasons for my actions.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I sometimes tell lies when I have to.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "There have been times when I have taken advantage of someone.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I never swear.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "Sometimes I prefer to get even with others than forgive and forget.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I have taken too much change without telling the salesperson.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I always declare everything I have to declare at customs.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "Sometimes I drive faster than the speed limit.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I have done things that I don't tell others about.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I never take things that don't belong to me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I have skipped work or school because of a 'supposed' illness.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
     ], 
     scale_width: 600,
     button_label: "Continue."
@@ -518,21 +562,21 @@
     type: jsPsychSurveyLikert,
     preamble: "<h3> filler </h3>",
     questions: [
-        {prompt: "It bothers me when people seem to be able to have any partner they want.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It's hard to bear when other people are more intelligent than me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It bothers me when others have things that I can't have.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It makes me uncomfortable when others are more attractive than me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It bothers me when others can express themselves better than I can.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It's hard for me to bear when others can buy everything they want.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It consumes me when others are more popular than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It bothers me when people are more creative than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It torments me when others have better technical equipment than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It bothers me when people get along better with others than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It gnaws at me when when others grasp a situation faster than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It's hard for me to bear when others have a fuller wardrobe than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It eats away at me when people are more popular with others than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It bothers me when others have more general knowledge than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
-        {prompt: "It gnaws at me when others live in a better neighborhood than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: true},
+        {prompt: "It bothers me when people seem to be able to have any partner they want.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It's hard to bear when other people are more intelligent than me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It bothers me when others have things that I can't have.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It makes me uncomfortable when others are more attractive than me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It bothers me when others can express themselves better than I can.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It's hard for me to bear when others can buy everything they want.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It consumes me when others are more popular than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It bothers me when people are more creative than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It torments me when others have better technical equipment than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It bothers me when people get along better with others than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It gnaws at me when when others grasp a situation faster than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It's hard for me to bear when others have a fuller wardrobe than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It eats away at me when people are more popular with others than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It bothers me when others have more general knowledge than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It gnaws at me when others live in a better neighborhood than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
     ], 
     scale_width: 600,
     button_label: "Continue."
@@ -548,7 +592,7 @@
         options: [
             "Male", "Female", "Non-binary", "Other", "Prefer not to say"
         ], 
-        required: true, 
+        required: false, 
         button_label: "Continue."
         }
     ],
@@ -558,7 +602,7 @@
     var age_question = {
     type: jsPsychSurveyText,
     questions: [
-        { prompt: "What is your age?", required: true }
+        { prompt: "What is your age?", required: false }
     ],
     button_label: "Continue."
     };
@@ -567,26 +611,27 @@
     //debrief here 
     var debrief = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: "debrief filler", 
+    stimulus: `
+        <h1>Thank you for participating in this study titled, Reproducibility of Psychological Science and Instruction.</h1>
+        <p>We were interested in games with low external control influences feelings of envy. You played a rock, paper, scissors with another participant and either won a reward or not. Following this, you responded to emotion assessments regarding how you felt towards the person you played rock, paper, scissors with.
+        <p>If other people knew the true purpose of the study, it might affect how they behave/answer questions, so we are asking you not to share the information we just discussed. </p><br>
+        <p>Thank you for your participation!</p><br>
+        <p style = "font-size:small"><i>Press any key to finish.</i></p>
+    `
     };
     timeline.push(debrief);
 
+    // save data using jsPsych-Pipe
+    const save_data = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "oDxchSd0ffjq",
+    filename: filename,
+     data_string: () => jsPsych.data.get().csv()  // now includes subject_id column
+    };
 
   // Run the experiment
 jsPsych.run(timeline);
-
-/* To do: 
-- remove people who don't consent from data <-- DONE
-- Adjust monetary amounts in instructions and results
-- Add a scoreboard for main game rounds
-- Make the scoreboard present throughout the surveys 
-- Test the full experiment for any bugs or issues (SEND TO RAS)
-- Collect data elsewhere besides just displaying at the end
-- Style the experiment to look nicer 
-    - make images display 'rock', 'paper', 'scissors' when hovered over
-    - center images on different display sizes 
-*/ 
-
 </script>
 </html>
 
