@@ -61,7 +61,7 @@ This task was shown to have external validity on increasing envy through converg
 
 ### Power Analysis
 
-Original effect size, power analysis for samples to achieve 80%, 90%, 95% power to detect that effect size.  Considerations of feasibility for selecting planned sample size.
+There was a medium to large effect size (*d*=0.70), so with an alpha of 0.05 and power of 0.80, a reasonable sample size would be **around 66-68**. This should be feasible unless there are large funding constraints. 
 
 ### Planned Sample
 
