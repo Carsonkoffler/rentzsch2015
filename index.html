@@ -36,6 +36,8 @@
         You: <span id="player-score">0</span><br>
         <span id="opponent-label">Opponent</span>: <span id="computer-score">0</span>
     </div>
+
+
 </body>
 
 <script>
@@ -60,7 +62,7 @@
       "exp_code/Images/Paper_Participant.png",
       "exp_code/Images/Scissors_Computer.png",
       "exp_code/Images/Scissors_Participant.png",
-      "exp_code/Images/Loading_icon.gif"
+      "exp_code/Images/Loading_icon.gif", 
     ]
   };
   timeline.push(preload);
@@ -101,8 +103,16 @@
     }
   }
 };
+timeline.push(consent);
+  
+var welcome = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `<p style="text-align:start;">Thank you for choosing to participate. We are studying how people make decisions under uncertainty.</p>
+               <p style="text-align:start;">You'll first play a quick game to test decision-making strategies. Your performance in this game will determine a small monetary bonus. <br>Afterwards, you'll complete a semantic categorization task to measure cognitive flexibility.<br>
+               <p><i>Press any key to begin.</i></p>`
+  };
+  timeline.push(welcome);
 
-  timeline.push(consent);
   // get participant name/Psuedonym here if desired
   var participant_name = {
     type: jsPsychSurveyText,
@@ -145,8 +155,8 @@
       </ol>
       <p style = "text-align: start">After you select your move, there will be a short countdown before both choices are revealed.</p>
       <p style = "text-align: start">No points will be rewarded for the practice round. After three rounds, the real round of rock, paper, scissors will begin.</p>
-      <p style = "text-align: start"><b>The winner of the final round will receive a monetary reward of $XX.</b></p>
-      <p style = "text-align: start"><i>Press any key to begin the practice rounds.</i></p>
+      <p style = "text-align: start"><b>The winner of the real round will receive a monetary reward of $XX.</b></p>
+      <p><i>Press any key to begin the practice rounds.</i></p>
     `
   };
   timeline.push(instructions);
@@ -167,7 +177,7 @@
   var introductions = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `<p>Your opponent for this game is <b>${computerName}</b>. Good luck!</p>
-               <p>Press any key to continue.</p>`
+               <p><i>Press any key to continue.</i></p>`
   };
   timeline.push(introductions);
 
@@ -300,14 +310,14 @@
         type: jsPsychHtmlKeyboardResponse,
         stimulus: `
         <h2>Final Round Instructions</h2>
-        <p style = "text-align: start">You will now proceed to the <b>final round</b> of Rock-Paper-Scissors against ${computerName}.</p>
-        <p style = "text-align: start">Remember the winner of the round will receive a reward of XXX.</p>
+        <p style = "text-align: start">You will now proceed to the <b>final round</b> of Rock, Paper, Scissors against ${computerName}.</p>
+        <p style = "text-align: start">Remember the winner of the round will receive a reward of $XXX.</p>
         <p style = "text-align: start">If there is a tie, the round will be replayed until there is a winner.</p>
-        <p style = "text-align: start"> The rules are below in case you forgot: </p>
-        <ol style ="list-style-type=decimal; list-style-position:inside;padding-left:0; display=inline-block; text-align: start">
-            <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li>
+        <p style = "text-align: start"> In case you forgot, the rules are below: </p>
+        <ol style ="list-style-type=decimal; list-style-position:inside;padding-left:10px; display=inline-block; text-align: start">
+            <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li></ol>
         <p style = "text-align: start">Good luck!</p>
-        <p style= "font-size:small; text-align:start"><i>Press any key to begin the main game.</i></p>
+        <p><i>Press any key to begin the final round.</i></p>
         `, 
         on_finish: function() {
             // show scoreboard
@@ -392,13 +402,13 @@
                     confetti({
                         particleCount: 150,
                         spread: 100,
-                        origin: { x: 0.25, y: 0.6 } // left side (player)
+                        origin: { x: 0.3, y: 0.6 } // left side (player)
                     });
                 } else if (result === "computer") {
                     confetti({
                         particleCount: 150,
                         spread: 100,
-                        origin: { x: 0.75, y: 0.6 } // right side (computer)
+                        origin: { x: 0.7, y: 0.6 } // right side (computer)
                     });
                 }
             }, 200);
@@ -419,7 +429,7 @@
             if (result === "player") {
             html += `<p style="font-size:24px; color:green;"><b>${participantName} wins this round!</b> ${participantName} wins $XX.</p>`;
             } else {
-            html += `<p style="font-size:24px; color:red;"><b>${computerName} wins this round!</b> Player 2 wins $XX.</p>`;
+            html += `<p style="font-size:24px; color:red;"><b>${computerName} wins this round!</b> ${computerName } wins $XX.</p>`;
             }
 
             
@@ -434,27 +444,10 @@
                     computerScoreEl.textContent = `$${(current + 5).toFixed(2)}`;
                 }
 
-            html += `<p style='font-size:small;'>Press any key to continue.</p>`;
+            html += `<p><i>Press any key to continue.</i></p>`;
             return html;
         }
         },
-        // create the scoreboard here to show someone earning money 
-        {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: function() {
-            let last_trial = jsPsych.data.get().last(1).values()[0];
-            let result = last_trial.result;
-            let html = `<h2>Earnings</h2><p>${participantName}'s Earnings: `;
-            if (result === "player") {
-            html += "$XX</p>";
-            } else {
-            html += "$0</p>";
-            }
-            html += `<p>Press any key to continue.</p>`;
-            return html;
-        }
-        }
-        
     ],
     };
 
@@ -469,10 +462,91 @@
     };
     timeline.push(attention_check);
 
+    //filler task --> semantic categorization task
+    var filler_instructions = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+        <p style = "text-align: start; margin-left: 20px; margin-right: 20px"> Thank you! Now, you will complete a short task to measure cognitive flexibility.</p>
+        <p style = "text-align: start; margin-left: 20px; margin-right: 20px"> In this task, you will see a set of 10 words. Your job is to select which category the set of words belong to.</p>
+        <p style = "text-align: start; margin-left: 20px; margin-right: 20px"> For example, if the set of words are: 
+        <br><br> Dog, Cat, Elephant, Tiger, Lion, Bear, Wolf, Fox, Giraffe, Zebra <br><br> 
+        a. Animals<br>b. Colors<br> c. Names <br> d. Pets<br><br>
+        You would select "Animals" from the multiple choice list as the category.</p>
+        <p><i> Press any key to begin the task.</i></p>
+    `
+    };
+    timeline.push(filler_instructions);
+
+    var filler_task = {
+      type: jsPsychSurveyMultiChoice, 
+      questions: [
+        {
+          prompt: "Which category do these words belong to? <br>Apple, Orange, Pear, Banana, Peach, Grape, Cherry, Plum, Grapefruit, Lemon",
+          options: [
+            "Fruits",
+            "Vegetables",
+            "Animals",
+            "Countries"
+          ],
+          required: false,
+          horizontal: false
+        }, 
+        {
+          prompt: "Which category do these words belong to? <br>Diamond, Ruby, Emerald, Sapphire, Pearl, Opal, Jade, Topaz, Amethyst, Onyx",  
+          options: [
+            "Colors",
+            "Jewels",
+            "Metals",
+            "Planets"
+          ],
+          required: false,
+          horizontal: false
+        },
+        {
+          prompt: "Which category do these words belong to? <br>Aunt, Uncle, Father, Mother, Brother, Sister, Cousin, Grandfather, Grandmother, Nephew",  
+          options: [
+            "Family Members",
+            "Friends",
+            "Colleagues",
+            "Neighbors"
+          ],
+          required: false,
+          horizontal: false
+        }, 
+        {
+          prompt: "Which category do these words belong to? <br>Legs, Arms, Head, Eye, Mouth, Nose, Finger, Ear, Hand, Toe",  
+          options: [
+            "Animals",
+            "Plants",
+            "Body Parts",
+            "Fruits"
+          ],
+          required: false,
+          horizontal: false
+        }, 
+        {
+          prompt: "Which category do these words belong to? <br>Knife, Spoon, Fork, Pan, Pot, Spatula, Cup, Stove, Bowl, Mixer",  
+          options: [
+            "Furniture",
+            "Appliances",
+            "Vehicles",
+            "Kitchen Utensils"
+          ],
+          required: false,
+          horizontal: false
+        }, 
+      ],
+      button_label: "Continue.", 
+      randomize_question_order: true
+    };
+    timeline.push(filler_task);
+        
   //measures for manipulation check and demographics would go here
     var appraisal_of_situation = {
         type: jsPsychSurveyLikert,
-        preamble: "<h3> Please answer the following questions honestly. There are no right or wrong answers. </h3>",
+        preamble: `<div style = "margin-top: 50px; margin-left: 50px; margin-right: 50px">
+        <h3>Please respond to the following statements by selecting the choice that reflects how you feel about the outcome of Rock, Paper, Scissors.</h3>
+        </div>`,
         questions: [
             {prompt: "", labels: ["The outcome was unfair to me.", "", "", "","","", "The outcome was fair to me."], required: false},
             {prompt: "", labels: ["The outcome of the situation was unjust.", "", "", "","","", "The outcome of the situation was just."], required: false}, 
@@ -489,20 +563,22 @@
         button_label: "Continue."
     }
     timeline.push(appraisal_of_situation);
-
+    //check the state emotion phrasings...
     var state_emotions = {
     type: jsPsychSurveyLikert,
-    preamble: "<h3> Filler </h3>",
+    preamble:  `<div style = "margin-top: 50px; margin-left: 50px; margin-right: 50px">
+      <h3>For the list below, please indicate how strongly you feel these emotions towards ${computerName}.</h3>
+      </div>`,
     questions: [
-        {prompt: "I am satisfied with myself.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I am a little jealous of that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I admire that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I feel worthless.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I envy that person.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I feel resentment.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false}, 
-        {prompt: "I feel jealousy.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false}, 
-        {prompt: "I feel shame.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I feel envy.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "I am satisfied with myself.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I am jealous of that person.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I admire that person.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I feel worthless.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I feel envious of that person.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I feel resentment.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false}, 
+        {prompt: "I feel jealous.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false}, 
+        {prompt: "I feel shame.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I feel envy.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
     ], 
     scale_width: 600,
     button_label: "Continue."
@@ -513,10 +589,10 @@
     type: jsPsychSurveyMultiChoice,
     questions: [
         {
-        prompt: "What do you attribute your result in the rock-paper-scissors game to? <i> Please choose only one of the four answer options!</i>",
+        prompt: "What do you attribute the result in the Rock, Paper, Scissors game to?<br><i>Please choose one of the four options below.</i>",
         options: [
             "My luck during the game.", 
-            "The difficulty of the task.</br>",
+            "The difficulty of the task.",
             "The other player's skill level.",
             "The other person's effort during the game."
         ], 
@@ -530,28 +606,31 @@
 
     var BIDR = {
     type: jsPsychSurveyLikert,
-    preamble: "<h3> filler </h3>",
+    preamble: `
+    <div style = "margin-top: 50px; margin-left: 50px; margin-right: 50px">
+    <h3>Please respond to the following statements by selecting the choice that reflects how you generally tend to feel.</h3>
+    </div>`,
     questions: [
-        {prompt: "The first impression I get of other people usually turns out to be true.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I haven't always been honest with myself.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I always know why I like something.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I find it difficult to push disturbing thoughts aside.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "Sometimes I miss out on something because I simply can't make up my mind quickly enough.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I am a completely rational thinker.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I rarely tolerate criticism.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I am very confident in my judgments.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I have occasionally doubted my abilities as a lover.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I don't always know the reasons for my actions.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I sometimes tell lies when I have to.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "There have been times when I have taken advantage of someone.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I never swear.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "Sometimes I prefer to get even with others than forgive and forget.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I have taken too much change without telling the salesperson.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I always declare everything I have to declare at customs.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "Sometimes I drive faster than the speed limit.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I have done things that I don't tell others about.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I never take things that don't belong to me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "I have skipped work or school because of a 'supposed' illness.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "The first impression I get of other people usually turns out to be true.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I haven't always been honest with myself.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I always know why I like something.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I find it difficult to push disturbing thoughts aside.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "Sometimes I miss out on something because I simply can't make up my mind quickly enough.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I am a completely rational thinker.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I rarely tolerate criticism.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I am very confident in my judgments.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I have occasionally doubted my abilities as a lover.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I don't always know the reasons for my actions.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I sometimes tell lies when I have to.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "There have been times when I have taken advantage of someone.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I never swear.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "Sometimes I prefer to get even with others than forgive and forget.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I have taken too much change without telling the salesperson.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I always declare everything I have to declare at customs.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "Sometimes I drive faster than the speed limit.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I have done things that I don't tell others about.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I never take things that don't belong to me.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "I have skipped work or school because of a 'supposed' illness.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
     ], 
     scale_width: 600,
     button_label: "Continue."
@@ -560,23 +639,25 @@
 
     var DSES = {
     type: jsPsychSurveyLikert,
-    preamble: "<h3> filler </h3>",
+    preamble: `<div style = "margin-top: 50px; margin-left: 50px; margin-right: 50px">
+    <h3>Please respond to the following statements by selecting the choice that reflects how you generally tend to feel.</h3>
+    </div>`,
     questions: [
-        {prompt: "It bothers me when people seem to be able to have any partner they want.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It's hard to bear when other people are more intelligent than me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It bothers me when others have things that I can't have.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It makes me uncomfortable when others are more attractive than me.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It bothers me when others can express themselves better than I can.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It's hard for me to bear when others can buy everything they want.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It consumes me when others are more popular than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It bothers me when people are more creative than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It torments me when others have better technical equipment than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It bothers me when people get along better with others than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It gnaws at me when when others grasp a situation faster than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It's hard for me to bear when others have a fuller wardrobe than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It eats away at me when people are more popular with others than I am.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It bothers me when others have more general knowledge than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
-        {prompt: "It gnaws at me when others live in a better neighborhood than I do.", labels:["Strongly disagree", "", "", "", "", "", "Strongly agree"], required: false},
+        {prompt: "It bothers me when people seem to be able to have any partner they want.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It's hard to bear when other people are more intelligent than me.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It bothers me when others have things that I can't have.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It makes me uncomfortable when others are more attractive than me.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It bothers me when others can express themselves better than I can.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It's hard for me to bear when others can buy everything they want.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It consumes me when others are more popular than I am.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It bothers me when people are more creative than I am.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It torments me when others have better technical equipment than I do.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It bothers me when people get along better with others than I do.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It gnaws at me when when others grasp a situation faster than I do.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It's hard for me to bear when others have a fuller wardrobe than I do.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It eats away at me when people are more popular with others than I am.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It bothers me when others have more general knowledge than I do.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
+        {prompt: "It gnaws at me when others live in a better neighborhood than I do.", labels:["Strongly disagree", "Moderately disagree", "Disagree a little", "Neither agree nor disagree", "Agree a little", "Moderately agree", "Strongly agree"], required: false},
     ], 
     scale_width: 600,
     button_label: "Continue."
@@ -588,40 +669,61 @@
     type: jsPsychSurveyMultiChoice,
     questions: [
         {
-        prompt: "What is your gender?",
+        prompt: "Please select the term below which best describes your gender identity",
         options: [
-            "Male", "Female", "Non-binary", "Other", "Prefer not to say"
+            "Male", "Female", "Non-binary", "My gender identity is not listed here", "Prefer not to say"
         ], 
         required: false, 
-        button_label: "Continue."
         }
     ],
+    button_label: "Continue."
     };
     timeline.push(gender_question);
 
     var age_question = {
     type: jsPsychSurveyText,
     questions: [
-        { prompt: "What is your age?", required: false }
+        { prompt: "What is your age in years?", required: false }
     ],
     button_label: "Continue."
     };
     timeline.push(age_question);
 
+    var attention_check_2 = {
+    type: jsPsychSurveyLikert,
+    preamble: "<h3>Attention Check</h3>",
+    questions: [
+        {prompt: "How much attention did you pay to the questions in this study", labels:["Almost none", "Very little", "Some", "A lot", "Almost all"], required: false}
+    ],
+    scale_width: 600,
+    button_label: "Continue."
+    };
+    timeline.push(attention_check_2);
+
+    var funnel = {
+    type: jsPsychSurveyText,
+    questions: [
+      {prompt: "What do you think this survey is about?", name: "funnel_1", required: false, rows: 5 },
+      {prompt: "What hypothesis/hypotheses do you think we were testing in this study?", name: "funnel_2", required: false, rows: 5 },
+      {prompt: "If you have any comments about the study, please write them below:", name: "comments", required: false , rows:5 }
+    ],
+    };
+    timeline.push(funnel);
+
     //debrief here 
     var debrief = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
-        <h1>Thank you for participating in this study titled, Reproducibility of Psychological Science and Instruction.</h1>
-        <p>We were interested in games with low external control influences feelings of envy. You played a rock, paper, scissors with another participant and either won a reward or not. Following this, you responded to emotion assessments regarding how you felt towards the person you played rock, paper, scissors with.
-        <p>If other people knew the true purpose of the study, it might affect how they behave/answer questions, so we are asking you not to share the information we just discussed. </p><br>
-        <p>Thank you for your participation!</p><br>
-        <p style = "font-size:small"><i>You may now close the tab.</i></p>
+        <h2 style = "text-align: start; margin-right: 50px; margin-left: 50px">Thank you for participating in this study titled, Reproducibility of Psychological Science and Instruction.</h2>
+        <p style = "text-align: start; margin-right: 50px; margin-left: 50px">We were interested in games with low external control influence feelings of envy. You played a rock, paper, scissors with another participant and either won a reward or not. Following this, you responded to emotion assessments regarding how you felt towards the person you played rock, paper, scissors with.
+        <p style = "text-align: start; margin-right: 50px; margin-left: 50px">If other people knew the true purpose of the study, it might affect how they behave/answer questions, so we are asking you not to share the information we just discussed. </p><br>
+        <p style = "text-align: start; margin-right: 50px; margin-left: 50px">Thank you for your participation!</p><br>
+        <p><i>You may now close the tab.</i></p>
     `, 
       choices: "NO_KEYS",       // prevent manual advancement
-    trial_duration: 5000,     // display for 5 seconds
+    trial_duration: 30000,     // display for 30 seconds
     on_finish: function() {
-        window.location.href = "about:blank";  // redirect to a blank page
+        window.location.href = "about:blank";  // redirect to a blank page after 30 seconds
       }
     };
     timeline.push(debrief);
@@ -637,8 +739,7 @@
   timeline.push(save_data)
 
   // Run the experiment
-jsPsych.run(timeline);
+jsPsych.run(timeline)
+
 </script>
 </html>
-
-
