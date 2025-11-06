@@ -5,7 +5,7 @@ library(purrr)
 library(stringr)
 
 # Set working directory
-path <- "/Users/carsonkoffler/Documents/R_Coding/rentzsch2015/docs/osfstorage-archive"
+path <- "/Users/carsonkoffler/Documents/R_Coding/rentzsch2015/data/osfstorage-archive"
 setwd(path)
 
 process_participant <- function(file_path) {
