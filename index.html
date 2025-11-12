@@ -687,7 +687,7 @@ var welcome = {
     type: jsPsychSurveyMultiChoice,
     questions: [
         {
-        prompt: "Please select the term below which best describes your gender identity",
+        prompt: "Please select the term below which best describes your gender identity.",
         options: [
             "Male", "Female", "Non-binary", "My gender identity is not listed here", "Prefer not to say"
         ], 
@@ -695,7 +695,7 @@ var welcome = {
         name: "demo_gender"
         }
     ],
-    button_label: "Continue."
+    button_label: "Continue"
     };
     timeline.push(gender_question);
 
@@ -704,7 +704,7 @@ var welcome = {
     questions: [
         { prompt: "What is your age in years?", required: false }
     ],
-    button_label: "Continue.", 
+    button_label: "Continue", 
     name: "demo_age"
     };
     timeline.push(age_question);
@@ -713,10 +713,10 @@ var welcome = {
     type: jsPsychSurveyLikert,
     preamble: "<h3>Attention Check</h3>",
     questions: [
-        {prompt: "How much attention did you pay to the questions in this study", labels:["Almost none", "Very little", "Some", "A lot", "Almost all"], required: false}
+        {prompt: "How much attention did you pay to the questions in this study?", labels:["Almost none", "Very little", "Some", "A lot", "Almost all"], required: false}
     ],
     scale_width: 600,
-    button_label: "Continue.", 
+    button_label: "Continue", 
     name: "total_attention"
     };
     timeline.push(attention_check_2);
@@ -739,7 +739,7 @@ var welcome = {
         <p style = "text-align: start; margin-right: 50px; margin-left: 50px">We were interested in games with low external control influence feelings of envy. You played a rock, paper, scissors with another participant and either won a reward or not. Following this, you responded to emotion assessments regarding how you felt towards the person you played rock, paper, scissors with.
         <p style = "text-align: start; margin-right: 50px; margin-left: 50px">If other people knew the true purpose of the study, it might affect how they behave/answer questions, so we are asking you not to share the information we just discussed. </p><br>
         <p style = "text-align: start; margin-right: 50px; margin-left: 50px">Thank you for your participation!</p><br>
-        <p><i>Press the space to continue</i></p>
+        <p><i>Press the space to continue.</i></p>
     `, 
       choices: " ",       // prevent manual advancement
     trial_duration: 60000,     // display for a minute
