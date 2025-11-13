@@ -731,6 +731,16 @@ var welcome = {
     };
     timeline.push(funnel);
 
+    // save data using jsPsych-Pipe
+    const save_data = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "oDxchSd0ffjq",
+    filename: filename,
+     data_string: () => jsPsych.data.get().csv()  // now includes subject_id column
+    };
+  timeline.push(save_data)
+
     //debrief here 
     var debrief = {
     type: jsPsychHtmlKeyboardResponse,
@@ -749,15 +759,7 @@ var welcome = {
     };
     timeline.push(debrief);
 
-    // save data using jsPsych-Pipe
-    const save_data = {
-    type: jsPsychPipe,
-    action: "save",
-    experiment_id: "oDxchSd0ffjq",
-    filename: filename,
-     data_string: () => jsPsych.data.get().csv()  // now includes subject_id column
-    };
-  timeline.push(save_data)
+    
 
   // Run the experiment
 jsPsych.run(timeline)
