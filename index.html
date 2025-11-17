@@ -109,7 +109,7 @@ var welcome = {
     type: jsPsychHtmlKeyboardResponse,
     choices: " ",
     stimulus: `<p style="text-align:start; width: 1000">Thank you for choosing to participate. We are studying how people make decisions under uncertainty.</p>
-               <p style="text-align:start; width: 1000">You'll first play a quick game to test decision-making strategies. Your performance in this game will determine a small monetary bonus. <br>Afterwards, you'll complete a semantic categorization task to measure how competition impacts the way we group words.<br>
+               <p style="text-align:start; width: 1000">You'll first play a quick game to test decision-making strategies. Your performance in this game will determine a small monetary bonus. <br>Afterwards, you'll complete a semantic categorization task to measure how decisions are made with access to more information.<br>
                <p><i>Press the spacebar to begin.</i></p>`
   };
   timeline.push(welcome);
@@ -710,16 +710,16 @@ var welcome = {
     var debrief = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
-        <h2 style = "text-align: start; margin-right: 50px; margin-left: 50px">Thank you for participating in this study titled, Reproducibility of Psychological Science and Instruction.</h2>
-        <p style = "text-align: start; margin-right: 50px; margin-left: 50px">We were interested in games with low external control influence feelings of envy. You played a rock, paper, scissors with another participant and either won a reward or not. Following this, you responded to emotion assessments regarding how you felt towards the person you played rock, paper, scissors with.
+        <h2 style = "text-align: start; margin-right: 50px; margin-left: 50px">Thank you for participating in this study.</h2>
+        <p style = "text-align: start; margin-right: 50px; margin-left: 50px">Earlier you played a game of rock, paper, scissors and either won or lost $1. We are going to give everyone a bonus of $1 <i>regardless</i> of the outcome of the game to thank you for your participation.<br></p>
+        <p style = "text-align: start; margin-right: 50px; margin-left: 50px">We were interested in how games with low external control influence feelings of envy. You played a rock, paper, scissors with another participant and either won a reward or not. Following this, you responded to emotion assessments regarding how you felt towards the person you played rock, paper, scissors with.</p>
         <p style = "text-align: start; margin-right: 50px; margin-left: 50px">If other people knew the true purpose of the study, it might affect how they behave/answer questions, so we are asking you not to share the information we just discussed. </p><br>
-        <p style = "text-align: start; margin-right: 50px; margin-left: 50px">Thank you for your participation!</p><br>
-        <p><i>Press the space to continue.</i></p>
+        <p><i>Press the space to be redirected to Prolific to log completion. You will be automatically redirected in one minute.</i></p>
     `, 
       choices: " ",       // prevent manual advancement
     trial_duration: 60000,     // display for a minute
     on_finish: function() {
-        window.location.href = "about:blank";  // PUT PROLIFIC COMPLETION URL HERE -- TO DO
+        window.location.href = "https://app.prolific.co/submissions/complete?cc=XXXXXXX";  // PUT PROLIFIC COMPLETION URL HERE -- TO DO
       }
     };
     timeline.push(debrief);
