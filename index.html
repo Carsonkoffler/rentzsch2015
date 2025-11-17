@@ -736,7 +736,7 @@ var welcome = {
         <p style = "text-align: start; margin-right: 50px; margin-left: 50px">If other people knew the true purpose of the study, it might affect how they behave/answer questions, so we are asking you not to share the information we just discussed. </p><br>
         <p><i>Press the space to be redirected to Prolific to log completion. You will be automatically redirected in one minute.</i></p>
     `, 
-      choices: " ",       // prevent manual advancement
+      choices: [" "],       // prevent manual advancement
     trial_duration: 60000,     // display for a minute
     on_finish: function() {
         data.
