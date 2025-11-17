@@ -52,12 +52,21 @@
     jsPsych.data.addProperties({ subject_id: subject_id });
     const filename = `${subject_id}.csv`;
 
-    var experiement_time = new Date().toISOString().slice(0,10);
+    var experiment_date = new Date().toISOString().slice(0,10);
     jsPsych.data.addProperties({
     experiment_date: experiment_date
   });
-    jsPsych.data.write({
-    study_version: "Pilot B"
+
+
+
+  // capture info from Prolific
+  //var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID'); do not capture prolific PID yet 
+  var study_id = jsPsych.data.getURLVariable('STUDY_ID');
+  var session_id = jsPsych.data.getURLVariable('SESSION_ID');
+
+  jsPsych.data.addProperties({
+    study_id: study_id,
+    session_id: session_id
   });
   // --- Preload images ---
   var preload = {
