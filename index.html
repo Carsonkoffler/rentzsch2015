@@ -51,7 +51,14 @@
     const subject_id = jsPsych.randomization.randomID(10);
     jsPsych.data.addProperties({ subject_id: subject_id });
     const filename = `${subject_id}.csv`;
-            
+
+    var experiement_time = new Date().toISOString().slice(0,10);
+    jsPsych.data.addProperties({
+    experiment_date: experiment_date
+  });
+    jsPsych.data.write({
+    study_version: "Pilot B"
+  });
   // --- Preload images ---
   var preload = {
     type: jsPsychPreload,
@@ -719,6 +726,7 @@ var welcome = {
       choices: " ",       // prevent manual advancement
     trial_duration: 60000,     // display for a minute
     on_finish: function() {
+        data.
         window.location.href = "https://app.prolific.co/submissions/complete?cc=XXXXXXX";  // PUT PROLIFIC COMPLETION URL HERE -- TO DO
       }
     };
