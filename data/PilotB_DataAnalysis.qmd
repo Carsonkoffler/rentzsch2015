@@ -1,0 +1,402 @@
+---
+title: "pilotb_rentzsch2015_ck"
+author: "Carson Koffler"
+format: html
+editor: visual
+---
+
+# Pre-processing 
+
+## Pulling Raw Data and Formatting 
+
+Note to self:
+
+-   did not name attention check 3 properly in the JsPsych file. Will need to pull that out and rename in here. Should work for the final run.
+
+```{r processing_data echo=FALSE}
+library(jsonlite)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(stringr)
+library(jsonlite)
+library(readr)
+
+# Set working directory --> using only PilotB data for now
+path <- "/Users/carsonkoffler/Documents/R_Coding/rentzsch2015/data/osfstorage/PilotB"
+setwd(path)
+
+files <- list.files(path = path, pattern = "\\.csv$", full.names = T) #list all files folder
+
+length(files) #number of files --> should match n 
+
+head(files) #View
+
+#read and combine participant data into one file 
+all_data <- files %>%
+  map_dfr(function(file_path){
+    read_csv(
+      file_path,
+      col_types = cols(
+        prolific_id_last4 = col_character(),  # force consistent type
+        .default = col_guess()                # let all other columns be guessed
+      )
+    )
+  })
+
+all_data <- as_tibble(all_data)
+
+
+#summarize participant data 
+participants <- all_data %>%
+  group_by(subject_id) %>%
+  summarise(success = first(success), #complete = T/F
+            experiment_data = first(experiment_date), #date study done
+            game_condition = first(random_condition), #condition: Winner/Loser
+            prolific_id = first(prolific_id_last4),  #Last 4 of prolific id
+            total_time = max(time_elapsed, na.rm = T),  #total time to complete study
+            version = first(version)) #study version 
+
+
+
+# Identify survey rows want to keep 
+survey_data <- all_data %>%
+  dplyr::filter(str_detect(trial_type, "survey")) %>%
+  dplyr::select(subject_id, trial_type, response)
+
+# Convert JSON strings to lists and expand (1 column per Q)
+survey_expanded <- survey_data %>%
+  mutate(response_list = map(response, ~ {
+    # Convert string JSON to R list
+    if (!is.na(.x) && .x != "") {
+      as.list(fromJSON(.x))
+    } else {
+      NA
+    }
+  })) %>%
+  dplyr::select(-response) %>%
+  unnest_wider(response_list)
+
+# fix data that was not named (Q0 contains psuedonym and attention check 3 as of 11/18/25)
+columns_fixed <- survey_expanded %>%
+  group_by(subject_id) %>%
+  summarise(
+    pseudonym = Q0[!map_lgl(Q0, is.null)][1],
+    attention_check_3 = Q0[!map_lgl(Q0, is.null)][2]
+  )
+
+#join columns_fixed to survey_expanded
+survey_expanded <- survey_expanded %>%
+  left_join(columns_fixed, by = "subject_id")
+
+#add attention check 1 that was filtered out earlier
+attention_check_1 <- all_data %>%
+  filter(str_detect(stimulus, "Who won the last round you played\\?")) %>%
+  dplyr::select(subject_id, attention_check_1=response)
+
+#add attention check 1 to the df 
+survey_expanded <- survey_expanded %>%
+  left_join(attention_check_1, by = "subject_id")
+
+#rename attention check 2 to fit format 
+survey_expanded <- survey_expanded %>% 
+  rename(attention_check_2 = DV5_attention_check, 
+         psuedonum = Q0)
+
+
+# Join expanded survey data back to main dataframe
+# If multiple survey rows per subject, we can summarize by taking the first non-NA per column
+df <- survey_expanded %>%
+  group_by(subject_id) %>%
+  summarise(across(everything(), ~ first(na.omit(.x)), .names = "{.col}"))
+
+df <- df %>%
+  left_join(participants, by = "subject_id")
+```
+
+## Data Exclusions 
+
+Data will be excluded if the participant 1) did not complete the survey 2) failed all 3 attention checks or 3) accuracy is \< 60% on the filler questions (i.e., miss more than 2)
+
+```{r data_exclusions}
+#| echo: false
+#Exclude participants who didn't complete the experiment
+data_complete <- df %>%
+  filter(success == "TRUE")
+
+n_total <- df %>%
+  distinct(subject_id) %>%
+  nrow()
+
+n_excluded_incomplete <- n_total - n_distinct(data_complete$subject_id)
+
+print(paste("Excluded for incompletion:", n_excluded_incomplete))
+print(paste("Remaining participants:", n_distinct(data_complete$subject_id)))
+
+### Exclude participants who failed attention checks
+
+#create pass/fail for attention_check_1
+data_complete <- data_complete %>%
+  mutate(
+    attention_check_1 = case_when(
+      (game_condition == "winner" & attention_check_1 == 0) ~ "pass", # 0 if select participant won --> winner = participant win
+      (game_condition == "loser" & attention_check_1 == 1) ~ "pass", # 1 if select computer win --> loser = computer win
+      TRUE ~ "fail"
+    )
+  )
+
+#LIKERT SCALES coded 0-6 NOT 1-7 
+
+data_attention <- data_complete %>%
+  filter(attention_check_1 == "pass" & attention_check_2 == 6 & attention_check_3 > 1)
+
+n_excluded_attention <- n_distinct(data_complete$subject_id) - 
+  n_distinct(data_attention$subject_id)
+
+print(paste("Excluded for failed attention checks:", n_excluded_attention))
+print(paste("Remaining participants:", n_distinct(data_attention$subject_id)))
+
+
+
+# Check the filler Qs 
+#create a key 
+correct_answers <- c(
+  filler_1 = "Fruits",
+  filler_2 = "Jewels",
+  filler_3 = "Family Members",
+  filler_4 = "Body Parts",
+  filler_5 = "Kitchen Utensils"
+)
+
+#check if each participant data matches key and compute an accuracy score
+data_complete <- data_complete %>%
+  mutate(across(
+    .cols = names(correct_answers),
+    .fns  = ~ .x == correct_answers[cur_column()],
+    .names = "correct_{col}"
+  )) %>%
+  rowwise() %>%
+  mutate(accuracy = mean(c_across(starts_with("correct_")))) %>%
+  ungroup()
+
+data_accuracy <- sum(data_complete$accuracy < 0.60)
+
+print(paste("Excluded for failing filler questions:", data_accuracy))
+print(paste("Remaining participants:", n_distinct(data_complete$subject_id))) ##TO DO
+
+
+# plot data exclusions 
+exclusion_summary <- tibble(
+  Stage = c("Initial", 
+            "After incompletion", 
+            "After attention checks"),
+  N_Participants = c(n_total,
+                     n_distinct(data_complete$subject_id),
+                     n_distinct(data_attention$subject_id)),
+  N_Excluded = c(0,
+                 n_excluded_incomplete,
+                 n_excluded_attention)
+)
+
+exclusion_summary %>%
+  knitr::kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Visualize exclusion cascade 
+ggplot(exclusion_summary %>% filter(!is.na(Stage)), 
+       aes(x = reorder(Stage, -N_Participants), y = N_Participants)) +
+  geom_bar(stat = "identity", fill = "#1976D2", alpha = 0.7) +
+  geom_text(aes(label = N_Participants), vjust = -0.5) +
+  labs(title = "Participant Exclusion Cascade",
+       x = "Stage",
+       y = "Number of Participants") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Demographics 
+
+```{r demographics}
+library(ggplot2)
+library(viridis)
+
+#plot ages 
+data_complete$age <- as.numeric(data_complete$age)
+
+summary(data_complete$age)
+#histogram
+ggplot(data = data_complete, aes(x= age))+
+  geom_histogram(
+    binwidth = 2, 
+    fill = "#39568CFF") +
+  labs(
+    title = "Distribution of Participant Ages",
+    x = "Age", 
+    y = "Count")+
+  theme_minimal()
+
+#plot gender 
+names(which.max(table(data_complete$demo_gender)))
+
+#histogram
+ggplot(data = data_complete, aes(x= demo_gender))+
+  geom_bar(fill = "#39568CFF") +
+  labs(
+    title = "Number of Participant's by Gender", 
+    x = "Gender", 
+    y = "Count")+
+  theme_minimal()
+
+#plot time taken
+summary(data_complete$total_time/60000) #time taken in minutes ms:min --> 60000:1 
+#histogram
+ggplot(data = data_complete, aes(x= total_time/60000))+
+  geom_bar(fill = "#39568CFF") +
+  labs(
+    title = "Amount of Time Taken to Complete Survey",
+    x = "Time to Complete Survey (minutes)", 
+    y = "Count")+
+  theme_minimal()
+```
+
+# Main Analyses
+
+How do random change resource distributions impact envy? Do people who lose by random chance envy winners more?
+
+```{r}
+library(ggplot2)
+library(viridis)
+
+#--- Does game outcome predict state envy? ---
+
+#code game condition
+data_complete$game_condition_coded <- ifelse(data_complete$game_condition == "winner", 1, 0)
+
+#state envy composite 
+data_complete$state_envy_composite <- rowMeans(
+  data_complete[, c("DV2_emotion_envy",
+                    "DV2_emotion_envy_2",
+                    "DV2_emotion_jealousy",
+                    "DV2_emotion_jealousy_2")],
+  na.rm = TRUE
+)
+hist(data_complete$state_envy_composite, main="State Envy Composite", xlab="Envy Score")
+
+
+summary(lm(data=data_complete, state_envy_composite ~ game_condition_coded))
+
+t.test(x= data_complete$game_condition_coded, y = data_complete$state_envy_composite, 
+       alternative = "two.sided", 
+       paired = FALSE,
+       conf.level = 0.95)
+
+
+
+#bar plot with 95% CI
+summary_envy <- data_complete %>%
+  group_by(game_condition_coded) %>%
+  summarise(
+    mean_envy = mean(state_envy_composite, na.rm = TRUE),
+    se_envy = sd(state_envy_composite, na.rm = TRUE)/sqrt(n())
+  )
+
+
+ggplot(summary_envy, aes(x = factor(game_condition_coded), y = mean_envy)) +
+  geom_col(fill = "skyblue") +
+  geom_errorbar(aes(ymin = mean_envy - se_envy, ymax = mean_envy + se_envy), width = 0.2) +
+  labs(
+    x = "Game Condition (0 = Loser, 1 = Winner)",
+    y = "State Envy Composite",
+    title = "Mean Envy by Game Condition"
+  ) +
+  theme_minimal()
+
+
+
+#violin plot
+ggplot(data_complete, aes(x = factor(game_condition_coded), y = state_envy_composite)) +
+  geom_violin(fill = "lightblue", alpha = 0.5, color = "darkblue") +  # distribution
+  geom_jitter(width = 0.1, size = 3, color = "darkred") +             # individual points
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 4, color = "black") + # mean
+  labs(
+    x = "Game Condition (0 = Loser, 1 = Winner)",
+    y = "State Envy Composite",
+    title = "State Envy by Game Condition"
+  ) +
+  theme_minimal()
+
+#Rentzsch and Gross (2015) findings on reward outcome on state envy 
+# Analysing the main effect of the situation revealed that participants who did not receive the reward reported stronger feelings of envy (M = 2.00, SD = 1.08) than participants who received the reward (M = 1.31, SD = 0.89), t(57) = 2.67, p = .01.
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#---- corrlation between dispositional envy and state envy ----
+
+
+#total dispositional envy corr with state envy 
+disp_envy_cols <- grep("DV5", names(data_complete), value = TRUE)
+
+data_complete$total_dispositional_envy <- rowMeans(data_complete[, disp_envy_cols], na.rm = TRUE)
+
+cor(data_complete$total_dispositional_envy, data_complete$state_envy_composite)
+
+#type of dispositional envy corr with state envy
+disp_envy_a_cols <- grep("Attraction", names(data_complete), value = TRUE)
+disp_envy_c_cols <- grep("Competence", names(data_complete), value = TRUE)
+disp_envy_w_cols <- grep("Wealth", names(data_complete), value = TRUE)
+
+data_complete$dispositional_envy_a <- rowMeans(data_complete[, disp_envy_a_cols], na.rm = TRUE)
+data_complete$dispositional_envy_c <- rowMeans(data_complete[, disp_envy_c_cols], na.rm = TRUE)
+data_complete$dispositional_envy_w <- rowMeans(data_complete[, disp_envy_w_cols], na.rm = TRUE)
+
+sapply(data_complete[66:68], function(x) cor(x, data_complete$state_envy_composite, use = "complete.obs"))
+
+#visualizations 
+ggplot(data = data_complete, mapping = aes(x = total_dispositional_envy, y=state_envy_composite))+
+  geom_point(color="#440154FF", alpha=.5, size = 3) +
+  geom_smooth(method = "lm", color = "#31688EFF", se = TRUE) +
+  labs(
+    x = "Total Dispositional Envy", 
+    y = "State Envy", 
+    title = "The Relationship Between Dispositional Envy and State Envy") +
+  theme_minimal(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5))
+
+data_complete_long <- data_complete %>%
+  select(state_envy_composite,
+         dispositional_envy_a,
+         dispositional_envy_c,
+         dispositional_envy_w) %>%
+  pivot_longer(
+    cols = starts_with("dispositional_envy"),
+    names_to = "disp_type",
+    values_to = "disp_value"
+  ) %>%
+  mutate(
+    disp_type = recode(disp_type,
+                       "dispositional_envy_a" = "Attraction",
+                       "dispositional_envy_c" = "Competence",
+                       "dispositional_envy_w" = "Wealth")
+  )
+
+# Faceted scatter plot
+ggplot(data_complete_long, aes(x = disp_value, y = state_envy_composite)) +
+  geom_point(color = "#440154FF", alpha = 0.7, size = 3) +
+  geom_smooth(method = "lm", color = "#31688EFF", se = TRUE) +
+  facet_wrap(~disp_type, scales = "free_y") +
+  labs(
+    x = "Dispositional Envy",
+    y = "State Envy Composite",
+    title = "State Envy by Dispositional Envy Type"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(hjust = 0.5))
+
+#Rentzsch & Gross Findings (2015) for the predictiveness of disp envy on state envy:
+# Results revealed that dispositional envy significantly predicted state levels of envy for the non-reward condition (β = .48, SE = 0.16, p < .01; see the lower path in Figure 1), but not for the reward condition (β = .08, SE = 0.16, p = .67; see the upper path in Figure 1).
+# Higher levels of dispositional envy predicted higher levels of envy experienced in an upward-comparison situation. The effects were stable even when controlling for social desirability, sadness and anger. A χ2 difference test on probing whether the effects of each of the conditions differed from each other revealed a two-tailed p-value of 0.067(χ2 = 3.352, df = 1).
+```
+
+# Exploratory Analyses 
+
+How do random change resource distributions impact anger? Are people who lose by random chance more angry at winners?
+
+Are there differences in the attributions about the game depending on if you win/lose? Do people who win see the winning as a result of skill, whereas losers see losing as a result of luck/random chance?
