@@ -19,7 +19,6 @@ library(dplyr)
 library(tidyr)
 library(purrr)
 library(stringr)
-library(jsonlite)
 library(readr)
 
 # Set working directory --> using only PilotB data for now
@@ -272,6 +271,17 @@ ggplot(data = data_complete, aes(x= total_time/60000))+
   labs(
     title = "Amount of Time Taken to Complete Survey",
     x = "Time to Complete Survey (minutes)", 
+    y = "Count")+
+  theme_minimal()
+
+#plot conditions 
+data_complete$game_condition_coded <- ifelse(data_complete$game_condition == "winner", 1, 0)
+summary(data_complete$game_condition_coded)
+ggplot(data = data_complete, aes(x= game_condition_coded))+
+  geom_bar(fill = "#39568CFF") +
+  labs(
+    title = "Random conditions",
+    x = "Random Conditon", 
     y = "Count")+
   theme_minimal()
 ```

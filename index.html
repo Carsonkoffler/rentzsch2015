@@ -16,6 +16,7 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@2.1.0"></script>
   <link href="https://unpkg.com/jspsych@8.0.0/css/jspsych.css" rel="stylesheet" />
+  <script src="https://unpkg.com/@jspsych/plugin-call-function@1.1.3"></script>
   <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe"></script>
 </head>
 
@@ -45,6 +46,21 @@
   var jsPsych = initJsPsych();
 
   var timeline = [];
+
+  var random_condition;
+
+timeline.push({
+  type: jsPsychCallFunction,
+  func: function() {
+    random_condition = jsPsych.randomization.sampleWithoutReplacement(
+      ['winner', 'loser'],
+      1
+    )[0];
+
+    jsPsych.data.addProperties({ random_condition: random_condition });
+  }
+});
+
   let participantName = "";
 
     // Generate random subject ID for data filename
@@ -352,9 +368,6 @@ var welcome = {
     };
     timeline.push(main_game_instructions);
 
-    //create random assignment to conditions 
-    var random_condition = jsPsych.randomization.sampleWithoutReplacement(['winner', 'loser'], 1)[0];
-    jsPsych.data.addProperties({random_condition: random_condition});
     
     //main game code below 
     var main_game = {

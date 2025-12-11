@@ -6,136 +6,1050 @@ format:
   html:
     toc: true
     toc_depth: 3
+editor: 
+  markdown: 
+    wrap: 72
 ---
-
-
 
 <!-- Replication reports should all use this template to standardize reporting across projects.  These reports will be public supplementary materials that accompany the summary report(s) of the aggregate results. -->
 
 ## Introduction
 
-I have chosen to replicate Rentzsch and Gross’ (2015) work on looking at dispositional envy on state envy in didactic interactions (study 5). For my first year project, I am interested in studying the methods used to elicit envy to examine if they are truly eliciting what they claim to be (i.e., is this method making you envious or another corollary negative emotion). In refining envy manipulations, we can 1) better understand the boundaries between envy and other negative emotions and 2) make sure we are truly measuring what we intend to measure. Rentzsch and Gross in this study use the classic game - Rock, Paper, Scissors - to measure envy of the advantaged and disadvantaged players. Replicating this study will give us more information about different methods available to our lab for future envy research. Additionally, I can gain insight on the feasibility for this method online, as that is the primary research method our lab uses. 
+I have chosen to replicate Rentzsch and Gross’s (2015) study on predicting state envy in didactic interactions using their Domain-Specific Envy Scale (DSES; Study 5). Rentzsch and Gross (2015) argue that state envy varies across comparison domains, suggesting that dispositional envy also varies across domains and may function relatively independently across them. To capture this, they developed a scale that separates dispositional envy into three domains: Wealth, Attraction, and Competence.
 
-This study was originally an in-person experiment, but for the purposes of this replication, I will transfer this design to being online with the understanding that this will provide evidence for a conceptual replication rather than a direct replication. The procedures are as follows (Note: since this is online, some of the procedures are different than the original): 
-  The participants will type in their name or a psuedonym to be applied to the game avatar and be introduced to the other player (an unbeknownst computerized player). The participants will be provided the rules to the rock-paper-scissors game and allowed to play three practice rounds. After practicing, they will play one round for a prize -- an additional monetary incentive (this was done in the 2023 version of the study). Participants will be placed in two conditions: High envy (Lost) and low envy (Won). The games will be coded to ensure that those in the high envy condition lose the last round and those in the low envy win the last round. To mirror the original study, I will have a virtual scoreboard present throughout the study that shows the winner and loser of the game and their monetary standings. Following the game, the participants will complete a short semantic categorization task as a distractor task (Patel et al., 1997). Then, they will fill out various measures to analyze their dispositional envy (using the DSES measure), social desirability (using BIDR measure), their state emotions (*"I am a little jealous of that person", "I envy the other person."*), thoughts about the attributes of the game [i.e., their skill, their luck, the task difficulty, their ability/effort(*"The outcome of the situation was unjust.", "The outcome of the situation was uncontrollable."*)], and whether or not they thought they could have won the game (*"What do you attribute your result in the rock-paper-scissors game to?"*). All of these measures are scaled on a 7-point Likert scale other than the attribution of the outcome measure which is a 4-option forced choice scale. Throughout the survey, there will be deliberate attention/comprehension checks and the semantic categorization task will also act as an attention check. All of the categories laid out are very simple and easy, so if participants get them all wrong, I can suspect that they are not engaging with the material. After all of the measures, the participants will be debriefed about the deception and given an equal amount as those in the low envy condition (i.e., those who won the game).  
+In Study 5, Rentzsch and Gross induced envy in the laboratory using a Rock-Paper-Scissors paradigm, in which only the game winner receives a reward. Rewards have included a chocolate bar (Rentzsch & Gross, 2015) or money (Rentzsch et al., 2023). They found that participants who did not receive a reward reported greater envy toward those who did, and dispositional envy predicted situational envy: individuals with higher dispositional envy experienced stronger envy during upward comparisons.
 
+This project is a conceptual replication of this paradigm in an online setting. The attached repository provides: 1) the experimental paradigm, 2) the analytic pipeline, and 3) anonymized data. Links to the pre-registration and experiment are also included below. For any additional information, please contact me at ckoffler\@ucsd.edu.
 
-This study should require around 68 participants. There was a medium to large effect size (*d*=0.68), so with an alpha of 0.05 and beta of 0.80, a reasonable sample size would be 68. While I have not completely coded up the survey yet to fully test the amount of time it would take to complete the study, I would estimate it should take around 15 minutes to complete the game and all of the measures.  
+github link: https://github.com/Carsonkoffler/rentzsch2015 
+experiment link: https://carsonkoffler.github.io/rentzsch2015/ 
+pre-registration link: https://osf.io/rcpt7/overview
 
-**Notes**: 
-1) The monetary incentive in the 2023 study was 10 euros, but I don't think we need to use that steep of a prize. In the past, Mike has used a dollar or so and was still able to find envy responses. Can we discuss the size of this amount once we have a better idea of the course's funds?  
+##Methods
+The only inclusion criterion for this study is fluency in English. Data collected from participants will include basic demographics (age and gender) and responses to the following measures: dispositional envy (using the DSES), state emotions toward the other player, situational appraisals, and outcome attribution. Except for the outcome attribution measure, which uses a 4-point scale, all other items are rated on a 7-point Likert scale. Participants with missing data on key variables or who fail attention checks will be excluded. Scale scores (DSES, state emotions, appraisals, outcome attributions) will be computed as the mean of the corresponding items, with reverse coding applied where appropriate. The manipulation variable will be dummy coded as 0 = loser (high envy condition) and 1 = winner (low envy condition).
 
-2) The measures can be found in the supplemental materials of a later study that used this method (Rentzsch et al., 2023). The 2023 study included more measures than the 2015 study I am replicating. I will double check with the Rentzsch, but the measures used in the 2015 should be found on tables 7 (DSES), 14 (BIDR), 27 (state emotions), 32 (appraisals about the situation), 37 (attribution of the outcome)
+The primary confirmatory test will be an independent-samples Welch’s t-test comparing state envy between winners and losers. Welch’s t-test was used because the assumption of equal variances was violated. This test directly evaluates the hypothesis that individuals will experience greater envy when they do not receive a reward, consistent with the original study.
 
-3) The semantic categorization task was not explicitly shown in the procedures, so I am going to create a very simple semantic categorization task using the word list from Patel, Bullinaria & Levy (1997). (information can also be found here: https://johnbullinaria.github.io/corpus.html )
+Additionally, a linear regression was conducted to examine whether dispositional envy predicts state envy. This analysis tests whether individuals with higher dispositional envy report higher state envy in response to upward comparisons, extending the original findings.
 
-Rentzsch, K., Giese, A.-K., Hebel, V., & Lösch, T. (2023). Personality and Emotions in Social Interactions – the PESI project. *Personality Science*, 4, 1-15. https://doi.org/10.5964/ps.8241
+Original findings: Participants who lost (did not receive a reward) reported higher envy (M = 2.00, SD = 1.08) than winners (M = 1.31, SD = 0.89), t(57) = 2.67, p = 0.01. A successful replication would reproduce this effect in the same direction and of similar magnitude. 
 
-Patel, M., Bullinaria, J. A., & Levy, J. P. (1997). Extracting semantic representations from large text corpora. In J. A. Bullinaria, D. W.
-Glasspool, & G. Houghton (Eds.), Fourth Neural Computation and Psychology Workshop: Connectionist Representations (pp. 199-212). London: Springer.
+<!--### Reliability and Validity
 
-
-## Methods
-I will be replicating study 5 in Rentzsch and Gross's (2015) study that analyzes state envy following a social interaction. 
-
-The only inclusion criteria for this study will be fluency in English. The data collected from participants will be basic demographics, age and gender, and responses to the following scales -- dispositional envy (using the DSES measure), social desirability (using BIDR measure), their state emotions, appraisals of the situation, and outcome attribution. Other than the outcome attribution measure which is a 4-point scale, all other data uses a 7-point likert scale. Participants with missing data on key variables or who fail attention checks will be excluded. Scale scores (DSES, BIDR, state emotions, appraisals, outcome attributions) will be computed as the median of the corresponding items after reverse coding where applicable. The manipulation variable will be dummy coded: 0 = winner (low envy condition), 1 = loser (high envy condition).
-
-The main confirmatory test will be an independent-samples t-test comparing state envy between winners and losers. This directly tests the hypothesis that people will envy those who receive a reward when they do not, consistent with the original study. Assumptions of normality and homogeneity of variances will be checked before analysis.
-
-Original findings: participants who lost (did not receive reward) reported higher envy (*M* = 2.00, *SD* = 1.08) than winners (received reward) (*M* = 1.31, *SD* = 0.89), *t*(57) = 2.67, *p* = 0.01. Successful replication would reproduce this effect in the same direction and similar magnitude.
-
-
-### Reliability and Validity 
-What is the key construct?  
+What is the key construct?
 
 The key construct measured is envy.
-        
-What is the measure?  
 
-Envy is being measured with an Emotional Experiences scale (Rentzsch & Gross, 2015). They have other variables being evaluated using different measures, but this is the measure that the state envy analysis relies on.
-     
-Is any reliability evidence shared or cited? Do they mention reliability?
+What is the measure?
 
-Reliability for the measures was shared using Chronbach's alpha. This measure assesses the internal reliability of items within the scales. All αs > 0.62 showing that there was a large internal reliability of items within the scales.
-     
+Envy is being measured with an Emotional Experiences scale (Rentzsch &
+Gross, 2015). They have other variables being evaluated using different
+measures, but this is the measure that the state envy analysis relies
+on.
+
+Is any reliability evidence shared or cited? Do they mention
+reliability?
+
+Reliability for the measures was shared using Chronbach's alpha. This
+measure assesses the internal reliability of items within the scales.
+All αs \> 0.62 showing that there was a large internal reliability of
+items within the scales.
+
 Is any validity evidence shared or cited? What sort of validity?
 
-This task was shown to have external validity on increasing envy through convergent validity. State envy increases for losers of the game correlated strongly with dispositional envy. This means that those who have higher rates of envy on average had increases in envy following the loss in the game. 
-
-
+This task was shown to have external validity on increasing envy through
+convergent validity. State envy increases for losers of the game
+correlated strongly with dispositional envy. This means that those who
+have higher rates of envy on average had increases in envy following the
+loss in the game.
+--> 
 
 ### Power Analysis
 
-There was a medium to large effect size (*d*=0.70), so with an alpha of 0.05 and power of 0.80, a reasonable sample size would be **around 66-68**. This should be feasible unless there are large funding constraints. 
+I will conduct a power analysis using the results of the t-test
+comparing the winner and loser group means of envy. The results from the
+original study are: "Analysing the main effect of the situation revealed
+that participants who did not receive the reward reported stronger
+feelings of envy (M = 2.00, SD = 1.08) than participants who received
+the reward (M = 1.31, SD = 0.89), t(57) = 2.67, p = .01."
 
-### Planned Sample
+```{r}
+library(pwr)
+## calculate cohen's d 
+m1 = 2.0
+s1 = 1.08
+m2 = 1.31
+s2 = 0.89
+s_pooled = sqrt(((s1^2)+(s2^2))/2)
+d = (m1-m2)/s_pooled
 
-Planned sample size and/or termination rule, sampling frame, known demographics if any, preselection rules if any.
+#power analysis to find required sample size
+cat("Cohen's d is", d)
+print(pwr.t.test(n = NULL, d=d, sig.level = 0.05, power = .8, 
+           type = "two.sample", alternative = "two.sided"))
 
-### Materials
+```
 
-All materials - can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+###Planned Sample
 
-### Procedure	
+Based on the power analyses (Cohen's *d* = .70), I will collect data
+from 68 participants and data collection will stop once complete data
+from all 68 participants has been collected from Prolific. The
+experiment should take about 12 minutes to complete.
 
-Can quote directly from original article - just put the text in quotations and note that this was followed precisely.  Or, quote directly and just point out exceptions to what was described in the original article.
+
+###Procedure
+
+This study will follow the original procedure as closely as possible,
+though moving to an online format will require a few changes. The
+original procedure is as follows:
+
+> " The study consisted of two parts (see supporting information S11 for
+> details). In the first part, participants filled out an online
+> questionnaire at home. In the second part, participants met in dyads
+> in the interaction laboratory at the university. Two weeks before
+> meeting in the interaction lab, participants filled out questionnaires
+> measuring traits such as dispositional envy and individual differences
+> in socially desirable responding. Dispositional envy was assessed with
+> the DSES (α = 91) using 7-point Likert scales ranging from 1 (not at
+> all) to 7 (very much). Social desirability was assessed as a control
+> measure with the other-deceptions scale of the BIDR (Paulhus, 1994;
+> German version by Musch et al., 2002, α = .62) on 7-point Likert
+> scales ranging from 1 (strongly disagree) to 7 (strongly agree).
+> Before arriving in the interaction lab, participants were matched by
+> sex to dyads at zero acquaintance, as research has shown that
+> similarity is an important condition for feelings of envy (Salovey &
+> Rodin, 1984). Participants sat face to face at a table (seating
+> position was randomized; the distance between participants was held
+> constant across settings, i.e. 140 cm). Then, participants played a
+> game called ‘Rock, Paper, Scissors’. The rules of the game were
+> provided on a handout. Participants had three trials to test the game.
+> Afterwards, the game started: participants were informed that the game
+> was over when one of the two participants won a trial and that the
+> winner would receive a small reward for purposes of motivation. The
+> reward was a highly valued chocolate bar (Milka Nussini) that was
+> placed in an opaque box next to both participants (the position of the
+> box was held constant across settings). The winner was instructed to
+> take the reward and leave it on the table next to him or herself.
+> Participants completed a questionnaire assessing their perceptions of
+> the situation and their feelings towards the ther person. For state
+> measures, participants were asked to rate the intensity of their
+> feelings on a 7-point Likert scale ranging from 1 (not at all) to 7
+> (very much). The intensity of feelings of envy was measured with two
+> items (i.e. ‘I am envious of the other person’ and ‘I envy the other
+> person’, α = .76). As control measures, participants rated the
+> intensity of their experience of sadness (‘I am sad’) and anger (‘I am
+> angry’) on the same rating scale. Furthermore, participants indicated
+> their previous experience with the Rock, Paper, Scissors game and
+> their attributions of the outcome of the game to luck, task
+> difficulty, ability or effort. Additionally, on a 7-point Likert scale
+> from 1 (not at all) to 7 (very much), participants indicated how much
+> they thought that they could have won the game. At the end,
+> participants were thanked and fully debriefed. "
+
+Here are the changes that I have made to format this design to online:
+
+1.  The study will be completed in only one part. For increased feasibility, The DSES measure was placed
+at the end of the survey. 
+
+2.  Participants will enter a simulated pairing process, and they will be randomly assigned to 1 of 4 computer names. The pairings are not constrained by any demographic data.
+
+3.  The reward for the winner of game was \$1 (versus a chocolate bar).
+
+4.  Instead of having a physical box containing a reward that was moved positionally towards the winner, a fixed on-screen scoreboard was displayed in the upper-right corner of the browser window. The element consisted of a blue rectangular panel with a black 2-pixel border, rounded corners (8 px radius), and 10 px padding. Its size was not fixed; instead, its width and height adjusted automatically to the text content (approximately 150–200 px wide and 70–100 px tall, depending on the user’s browser and font rendering). The scoreboard presented the label “Player Earnings,” followed by the participant’s current score and the opponent’s score.
+
+Beyond this, all else was the same.
+
+###Materials
+For the filler task between the game and the self-report measures, a semantic categorization task was completed. Participants saw 10 words and were asked to select the category that these words belonged too. The semantic categorization task was not explicitly shared in the procedures, so a simple semantic task was created using the word list from Patel, Bullinaria & Levy (1997). The dependent variables used the same measures as outlined in the original paper and the supplementary paper for the 2023 replication. The only change was the measures gathered was the removal of the BIDR from the study. 
 
 ### Analysis Plan
+There are 2 different criterion that we are judging attention on:
+1.  Three attention checks within the survey 
+2.  At least a score of 60% on the semantic categorizarion task
 
-Can also quote directly, though it is less often spelled out effectively for an analysis strategy section.  The key is to report an analysis strategy that is as close to the original - data cleaning rules, data exclusion rules, covariates, etc. - as possible.  
+We will exclude participants who fail 2/3 of the survey attention check questions and those who receive less than an accuracy score of 60% on the semantic categorization task. 
 
-**Clarify key analysis of interest here**  You can also pre-specify additional analyses you plan to do.
+The first analysis of interest is comparing which condition of the game (Winner, Loser) made participants more envious by conducting a Welch's t-test on a state-envy composite between conditions. The composite was comprised of 4-items: "I am jealous of that person"/"I feel envious of that person"/"I feel jealous"/"I feel envy". Envy and jealousy were averaged together because of their semantic similarity in everyday speech. 
+
+The second analysis is to test whether dispositional envy predicts state envy by conducting a linear regression. 
+
+In addition to these two confirmatory analyses, some exploratory analyses of interest comparing how the game conditions impact anger and seeing how the game conditions impact appraisals of the situation, specifically fairness evaluations. 
+
 
 ### Differences from Original Study
 
-Explicitly describe known differences in sample, setting, procedure, and analysis plan from original study.  The goal, of course, is to minimize those differences, but differences will inevitably occur.  Also, note whether such differences are anticipated to make a difference based on claims in the original article or subsequent published research on the conditions for obtaining the effect.
+There are four main differences between this study and the original:
 
-### Methods Addendum (Post Data Collection)
+1.  Setting: This experiment is conducted online rather than in person. This change introduces procedural differences, as outlined above. It is possible that state envy may be stronger in in-person comparisons; however, numerous online studies have successfully elicited envy, suggesting that the effect is not limited to face-to-face interactions.
 
-You can comment this section out prior to final report with data collection.
+2.  Sample: We are recruiting participants through Prolific, whereas the original study used undergraduate students in education and learning at a German university. While there may be some population differences, we do not expect this change to substantially alter the results.
+
+3.  Attention Checks: We have added additional attention checks to ensure data quality. The original study only excluded participants based on whether they found the reward valuable (screening for allergies or disliking of chocolate). Since this replication uses a monetary reward, that criterion is no longer relevant. We do not anticipate that this modification will affect the results.
+
+4.  Procedure: This experiment is conducted in a single session rather than two. To reduce participant burden, we focused on dispositional envy and removed the BIDR measure. Some original analyses controlled for social desirability using BIDR scores, so analyses in this replication may differ from the original on that account.
+
+In summary, the known differences involve sample, setting, procedure, and analysis plan. While we aim to minimize these differences, some are unavoidable. Based on the original article and subsequent research on conditions for obtaining the effect, none of these changes are expected to substantially alter the core findings.
+
+<!--### Methods Addendum (Post Data Collection)-->
+
+<!--You can comment this section out prior to final report with data collection.-->
 
 #### Actual Sample
-  Sample size, demographics, data exclusions based on rules spelled out in analysis plan
+There were 68 participants recruited from Prolific.  
 
 #### Differences from pre-data collection methods plan
-  Any differences from what was described as the original plan, or “none”.
 
+None. 
 
 ## Results
-
 
 ### Data preparation
 
 Data preparation following the analysis plan.
-	
-```{r include=F}
+
+```{r}
 ### Data Preparation
 
 #### Load Relevant Libraries and Functions
-
+library(jsonlite)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(stringr)
+library(readr)
+library(kableExtra)
+library(ggplot2)
 #### Import data
+# Set working directory
+path <- "/Users/carsonkoffler/Documents/R_Coding/rentzsch2015/data/osfstorage/Study1"
+setwd(path)
 
+files <- list.files(path = path, pattern = "\\.csv$", full.names = T) #list all files folder
+
+length(files) #number of files --> should match n 
+
+head(files) #View
+
+#read and combine participant data into one file 
+all_data <- files %>%
+  map_dfr(function(file_path){
+    read_csv(
+      file_path,
+      col_types = cols(
+        prolific_id_last4 = col_character(),  # force character type
+        participant_name = col_character(),   # force character type
+        .default = col_guess()                # let all other columns be guessed
+      )
+    )
+  })
+
+all_data <- as_tibble(all_data)
+
+
+#summarize participant data 
+participants <- all_data %>%
+  group_by(subject_id) %>%
+  summarise(success = first(success), #complete = T/F
+            experiment_data = first(experiment_date), #date study done
+            game_condition = first(random_condition), #condition: Winner/Loser
+            prolific_id = first(prolific_id_last4),  #Last 4 of prolific id
+            total_time = max(time_elapsed, na.rm = T),  #total time to complete study
+            version = first(version)) #study version 
+
+
+
+# Identify survey rows want to keep 
+survey_data <- all_data %>%
+  dplyr::filter(str_detect(trial_type, "survey")) %>%
+  dplyr::select(subject_id, trial_type, response)
+
+# Convert JSON strings to lists and expand (1 column per Q)
+survey_expanded <- survey_data %>%
+  mutate(response_list = map(response, ~ {
+    # Convert string JSON to R list
+    if (!is.na(.x) && .x != "") {
+      as.list(fromJSON(.x))
+    } else {
+      NA
+    }
+  })) %>%
+  dplyr::select(-response) %>%
+  unnest_wider(response_list)
+
+# fix data that was not named (Q0 contains psuedonym)
+columns_fixed <- survey_expanded %>%
+  group_by(subject_id) %>%
+  summarise(
+    pseudonym = Q0[!map_lgl(Q0, is.null)][1],
+  )
+
+#join columns_fixed to survey_expanded
+survey_expanded <- survey_expanded %>%
+  left_join(columns_fixed, by = "subject_id")
+
+#add attention check 1 that was filtered out earlier
+attention_check_1 <- all_data %>%
+  filter(str_detect(stimulus, "Who won the last round you played\\?")) %>%
+  dplyr::select(subject_id, attention_check_1=response)
+
+#add attention check 1 to the df 
+survey_expanded <- survey_expanded %>%
+  left_join(attention_check_1, by = "subject_id")
+
+#rename attention check 2 to fit format 
+survey_expanded <- survey_expanded %>% 
+  rename(attention_check_2 = DV5_attention_check, 
+         psuedonum = Q0)
+
+
+# Join expanded survey data back to main dataframe
+# If multiple survey rows per subject, we can summarize by taking the first non-NA per column
+df <- survey_expanded %>%
+  group_by(subject_id) %>%
+  summarise(across(everything(), ~ first(na.omit(.x)), .names = "{.col}"))
+
+df <- df %>%
+  left_join(participants, by = "subject_id")
+
+rm(list = setdiff(ls(), c("df", "path"))) #cleaning the enviornment 
 #### Data exclusion / filtering
+#Exclude participants who didn't complete the experiment
+data_complete <- df %>%
+  filter(success == "TRUE")
 
-#### Prepare data for analysis - create columns etc.
+n_total <- df %>%
+  distinct(subject_id) %>%
+  nrow()
+
+n_excluded_incomplete <- n_total - n_distinct(data_complete$subject_id)
+
+print(paste("Excluded for incompletion:", n_excluded_incomplete))
+print(paste("Remaining participants:", n_distinct(data_complete$subject_id)))
+
+#==============================================================================================
+### Exclude participants who failed 2/3 attention checks
+
+#create pass/fail for attention_check_1
+data_complete <- data_complete %>%
+  mutate(
+    attention_check_1 = case_when(
+      (game_condition == "winner" & attention_check_1 == 0) ~ "pass", # 0 if select participant won --> winner = participant win
+      (game_condition == "loser" & attention_check_1 == 1) ~ "pass", # 1 if select computer win --> loser = computer win
+      TRUE ~ "fail"
+    )
+  )
+
+#LIKERT SCALES coded 0-6 NOT 1-7 
+
+#filter if fail 2/3 attention checks 
+data_attention <- data_complete %>%
+  mutate(
+    fail1 = attention_check_1 != "pass", 
+    fail2 = attention_check_2 != 6, 
+    fail3 = attention_check_3 <= 1
+  ) %>%
+  filter(fail1 + fail2 + fail3 < 2)
+
+n_excluded_attention <- n_distinct(data_complete$subject_id) - n_distinct(data_attention$subject_id)
+
+print(paste("Excluded for failed attention checks:", n_excluded_attention))
+print(paste("Remaining participants:", n_distinct(data_attention$subject_id)))
+
+
+data_complete <- data_attention #override dataset to keep only those that failed <= 1 
+
+#==============================================================================================
+
+# Check the filler Qs 
+#create a key 
+correct_answers <- c(
+  filler_1 = "Fruits",
+  filler_2 = "Jewels",
+  filler_3 = "Family Members",
+  filler_4 = "Body Parts",
+  filler_5 = "Kitchen Utensils"
+)
+
+#check if each participant data matches key and compute an accuracy score
+data_complete <- data_complete %>%
+  mutate(across(
+    .cols = names(correct_answers),
+    .fns  = ~ .x == correct_answers[cur_column()],
+    .names = "correct_{col}"
+  )) %>%
+  rowwise() %>%
+  mutate(accuracy = mean(c_across(starts_with("correct_")))) %>%
+  ungroup()
+
+data_accuracy <- data_complete %>% 
+  filter(accuracy >= 0.60)
+
+# Count total and excluded
+n_excluded_accuracy <- n_distinct(data_complete$subject_id) - n_distinct(data_accuracy$subject_id)
+
+# Print results
+print(paste("Excluded for failing filler questions:", n_excluded_accuracy))
+print(paste("Remaining participants:", n_distinct(data_accuracy$subject_id)))
+
+
+
+# plot data exclusions 
+exclusion_summary <- tibble(
+  Stage = c("Initial", 
+            "After incompletion", 
+            "After attention checks", 
+            "After semantic categorization tasks"),
+  N_Participants = c(n_total,
+                     n_distinct(data_complete$subject_id),
+                     n_distinct(data_attention$subject_id), 
+                     n_distinct(data_accuracy$subject_id)),
+  N_Excluded = c(0,
+                 n_excluded_incomplete,
+                 n_excluded_attention, 
+                 n_excluded_accuracy)
+)
+
+
+exclusion_summary %>%
+  knitr::kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+# Visualize exclusion cascade 
+ggplot(exclusion_summary %>% filter(!is.na(Stage)), 
+       aes(x = reorder(Stage, -N_Participants), y = N_Participants)) +
+  geom_bar(stat = "identity", fill = "#1976D2", alpha = 0.7) +
+  geom_text(aes(label = N_Participants), vjust = -0.5) +
+  labs(title = "Participant Exclusion Cascade",
+       x = "Stage",
+       y = "Number of Participants") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+data_complete <- data_accuracy #make this df the final one for analyses 
+
+```
+
+### Demographic data 
+```{r}
+library(ggplot2)
+
+#plot ages 
+data_complete$age <- as.numeric(data_complete$age)
+
+summary(data_complete$age)
+#histogram
+ggplot(data = data_complete, aes(x= age))+
+  geom_histogram(
+    binwidth = 2, 
+    fill = "#39568CFF") +
+  labs(
+    title = "Distribution of Participant Ages",
+    x = "Age", 
+    y = "Count")+
+  theme_minimal()
+
+#plot gender 
+names(which.max(table(data_complete$demo_gender)))
+
+#histogram
+ggplot(data = data_complete, aes(x= demo_gender))+
+  geom_bar(fill = "#39568CFF") +
+  labs(
+    title = "Number of Participant's by Gender", 
+    x = "Gender", 
+    y = "Count")+
+  theme_minimal()
+
+#plot time taken
+summary(data_complete$total_time/60000) #time taken in minutes ms:min --> 60000:1 
+#histogram
+ggplot(data = data_complete, aes(x= total_time/60000))+
+  geom_density(fill = "#39568CFF") +
+  labs(
+    title = "Amount of Time Taken to Complete Survey",
+    x = "Time to Complete Survey (minutes)", 
+    y = "Count")+
+  theme_minimal()
+
+#plot conditions 
+data_complete$game_condition_coded <- ifelse(data_complete$game_condition == "winner", 1, 0)
+table(data_complete$game_condition_coded)
+
+ggplot(data = data_complete, aes(x= factor(game_condition_coded)))+
+  geom_bar(fill = "#39568CFF") +
+  labs(
+    title = "Number of Participants in the Game Conditions",
+    x = "Random Conditon", 
+    y = "Count")+
+  theme_minimal()
 ```
 
 ### Confirmatory analysis
 
-The analyses as specified in the analysis plan.  
+First, I will analyze the group differences in envy. 
+#### Group differences in state envy by game condition
+```{r}
+library(ggplot2)
+library(papaja)
 
-*Side-by-side graph with original graph is ideal here*
+#--- Does game outcome predict state envy? ---#
+
+#code game condition
+data_complete$game_condition_coded <- ifelse(data_complete$game_condition == "winner", 1, 0)
+
+#state envy composite 
+data_complete$state_envy_composite <- rowMeans(
+  data_complete[, c("DV2_emotion_envy",
+                    "DV2_emotion_envy_2",
+                    "DV2_emotion_jealousy",
+                    "DV2_emotion_jealousy_2")],
+  na.rm = TRUE
+)
+hist(data_complete$state_envy_composite, main="State Envy Composite", xlab="Envy Score")
+
+#state envy by game condition
+envy.mod <- lm(data=data_complete, state_envy_composite ~ game_condition_coded)
+
+t_envy_result <- t.test(state_envy_composite ~ game_condition_coded,data=data_complete)
+
+t_envy_result
+
+#calculate a cohen's d of the group differences 
+envy_cohensd<- effectsize::cohens_d(state_envy_composite ~ game_condition_coded,
+  data = data_complete
+)
+
+envy_cohensd$Cohens_d
+
+#calculate summary data: means, sd, 95% CI, n 
+summary_envy <- data_complete %>%
+  group_by(game_condition_coded) %>%
+  summarise(
+    mean_envy = mean(state_envy_composite, na.rm = TRUE),
+    sd_envy = sd(state_envy_composite, na.rm = TRUE),
+    se_envy = sd(state_envy_composite, na.rm = TRUE) / sqrt(n()),
+    ci95 = 1.96 * se_envy
+  )
+
+print(summary_envy)
+
+
+```
+Analyzing the main effect of the game condition revealed that participants who did not receive the reward reported stronger feelings of envy ($M = 1.73, SD = 1.50$) than participants who received the reward ($M = 0.34, SD = 0.54$), `r apa_print(t_envy_result)$statistic`. The effect of this group difference has a Cohen's d equal to `r round(envy_cohensd$Cohens_d, 2)`. This mirrors the findings from Rentzsch and Gross (2015) who find a significant group difference of 
+($M_{Loser}~ = 2.00, SD = 1.08$) than participants who received the reward ($M_{Winner} = 1.31, SD = 0.89),\hspace{.5mm}t(57) = 2.67, p = .01$. 
+
+The group differences in envy can be observed in the following figures.
+*Note about coding:* 
+- game_condition_code = 0 are the losers of the game who did not receive the reward
+- game_condition_code = 1 are the winners of the game who did receive the reward
+```{r}
+library(ggplot2)
+library(ggpubr)
+
+##bar plot 
+ggplot() +
+  # raw data points (jittered)
+  geom_jitter(
+    data = data_complete,
+    aes(x = factor(game_condition_coded), y = state_envy_composite),
+    width = 0.1, size = 2.5, alpha = 0.2, color = "black"
+  ) +
+  # bar showing means
+  geom_col(
+    data = summary_envy,
+    aes(x = factor(game_condition_coded), y = mean_envy),
+    fill = "gray50", alpha = 0.7
+  ) +
+  # 95% CI error bars
+  geom_errorbar(
+    data = summary_envy,
+    aes(
+      x = factor(game_condition_coded),
+      ymin = mean_envy - ci95,
+      ymax = mean_envy + ci95
+    ),
+    width = 0.15
+  ) +
+  labs(
+    x = "Game Condition (0 = Loser, 1 = Winner)",
+    y = "State Envy Composite",
+    title = "State Envy by Condition with Raw Data and 95% CI"
+  ) +
+  theme_minimal()
+
+
+
+##violin plot
+envy_violin<- ggplot(data_complete, aes(x = factor(game_condition_coded), y = state_envy_composite)) +
+  geom_violin(fill = "lightblue", alpha = 0.7) +  # distribution
+  geom_jitter(width = 0.1, size = 3, alpha = 0.3, color = "gray50") + # individual points
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 4, color = "black") + # mean
+  labs(
+    x = "Game Condition (0 = Loser, 1 = Winner)",
+    y = "State Envy Composite",
+    title = "State Envy by Game Condition"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  stat_compare_means(method = "t.test", label = "p.signif", size = 8, 
+                     label.y = max(data_complete$state_envy_composite)-.3, 
+                     label.x = 1.5)
+envy_violin
+
+ggsave("envy_violin.png", plot = envy_violin, width = 6, height = 4, units = "in", dpi = 300)
+
+
+
+##density plot 
+ggplot(data_complete, aes(x = state_envy_composite, fill = factor(game_condition_coded))) +
+  geom_density(alpha = 0.5) + 
+  labs(
+    x = "Game Condition (0 = Loser, 1 = Winner)",
+    y = "State Envy Composite",
+    title = "State Envy by Game Condition",
+    fill = "Game Codition"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.75)) +
+  scale_fill_discrete(labels = c("Loser", "Winner"))
+  
+```
+
+#### The relationship between dispositional envy and state envy
+Second, I will analyze the relationship between dispostional envy (measured using the DSES scale) and state envy. 
+```{r}
+#---- corrlation between dispositional envy and state envy ----
+
+
+#total dispositional envy corr with state envy 
+disp_envy_cols <- grep("DV5", names(data_complete), value = TRUE)
+
+data_complete$total_dispositional_envy <- rowMeans(data_complete[, disp_envy_cols], na.rm = TRUE)
+
+cor(data_complete$total_dispositional_envy, data_complete$state_envy_composite)
+summary(lm(data = data_complete, state_envy_composite~total_dispositional_envy))
+
+#lm broken by game condition to resemble Rentzsch and Gross 
+summary(lm(state_envy_composite ~ total_dispositional_envy, data = subset(data_complete, game_condition_coded == 0))) #lose 
+
+summary(lm(state_envy_composite ~ total_dispositional_envy, data = subset(data_complete, game_condition_coded == 1))) #win
+
+## ensuring that the scale was picking up dispositional envy and not just the game condition 
+lm(data=data_complete, total_dispositional_envy ~ game_condition_coded)
+
+t.test(total_dispositional_envy ~ game_condition_coded,data=data_complete)
+```
+Results revealed that dispositional envy significantly predicted state levels of envy for the non-reward condition (`r apa_print(lm(state_envy_composite ~ total_dispositional_envy, data = subset(data_complete, game_condition_coded == 0)))$full_result["total_dispositional_envy"]`), and for the reward condition (`r apa_print(lm(state_envy_composite ~ total_dispositional_envy, data = subset(data_complete, game_condition_coded == 1)))$full_result["total_dispositional_envy"]`). Higher levels of dispositional envy predicted higher levels of envy experienced in an upward-comparison situation. Since dispositional envy in this replication was measured in the same sitting as state envy, there was a chance that game condition was impacting people's survey responses, such that losers may indicate more dispositional envy as a function of having higher state envy. A t-test was conducting to see if there were group differences in dispositional envy between those who received and did not receive the reward. The analysis shows no significant result indicating the dispositional scale is picking up true disposition outside of situational envy triggered by the game, `r apa_print(t.test(total_dispositional_envy ~ game_condition_coded, data = data_complete))$full_result`. 
+
+This mirrored the original results which found "that dispositional envy significantly predicted state levels of envy for the non-reward condition (β = .48, SE = 0.16, p < .01; see the lower path in Figure 1), but not for the reward condition (β = .08, SE = 0.16, p = .67; see the upper path in Figure 1)" (pg 542).
+
+
+See below visualizations of the relationship between dispositional envy and state envy. 
+```{r}
+#visualizations 
+ggplot(data = data_complete, mapping = aes(x = total_dispositional_envy, y=state_envy_composite)) +
+  geom_jitter(color="#440154FF", alpha=.5, size = 3) +
+  geom_smooth(method = "lm", color = "#31688EFF", se = TRUE) +
+  labs(
+    x = "Total Dispositional Envy", 
+    y = "State Envy", 
+    title = "The Relationship Between Dispositional Envy and State Envy") +
+  theme_minimal(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.5))
+
+#visualizations split by condition
+corr_envyXcondition<- ggplot(data = data_complete, mapping = aes(x = total_dispositional_envy, y=state_envy_composite, color = factor(game_condition_coded))) +
+  geom_jitter(alpha=.3, size = 3) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    x = "Total Dispositional Envy", 
+    y = "State Envy", 
+    title = "The Relationship Between Dispositional Envy and State Envy", 
+    color = "Game Codition"
+    ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.75)) +
+  scale_color_discrete(labels = c("Loser", "Winner"))
+
+corr_envyXcondition
+
+ggsave("envy_corr.png", plot = corr_envyXcondition, width = 8, height = 6, units = "in", dpi = 300)
+```
+
+The results can be compared to the original results here:
+![Original Correlation Results](Rentzsch&Gross(2015)_Figure1.png){fig-alt="The results of the relationship between dispositional envy and correlational envy from Rentzsch and Gross (2015) Study 5."}
+
+#### Group differences in state envy by game condition controlling for dispositional envy
+
+Because dispositional envy strongly predicts state envy, we included it as a covariate in an ANCOVA to isolate the effect of game condition on state envy. This approach ensures that differences between winners and losers reflect situational, game-induced envy rather than baseline trait differences.
+```{r}
+library(emmeans)
+
+summary(lm(state_envy_composite ~ game_condition_coded + total_dispositional_envy, data = data_complete))
+
+summary(lm(state_envy_composite ~ game_condition_coded, data = data_complete))
+
+emmeans(lm(state_envy_composite ~ game_condition_coded + total_dispositional_envy, data = data_complete), "game_condition_coded")
+
+emmeans(lm(state_envy_composite ~ game_condition_coded, data = data_complete), "game_condition_coded")
+
+
+```
+After adjusting for dispositional envy, game condition still significantly predicted state envy, 
+`r apa_print(lm(state_envy_composite ~ game_condition_coded + total_dispositional_envy, data = data_complete))$full_result["game_condition_coded"]`, showing that winners reported lower state envy than losers.
+
+Estimated marginal means (adjusted for dispositional envy) revealed that losers had higher state envy (`r apa_print(emmeans(lm(state_envy_composite ~ game_condition_coded + total_dispositional_envy, data = data_complete), "game_condition_coded"))$estimate["X0"]`) than winners (`r apa_print(emmeans(lm(state_envy_composite ~ game_condition_coded + total_dispositional_envy, data = data_complete), "game_condition_coded"))$estimate["X0"]`), confirming that the game manipulation produced situational envy independent of trait differences.
+```{r}
+# Load packages
+library(ggplot2)
+library(emmeans)
+
+# Fit ANCOVA model (game condition and disp envy on state envy)
+ancova_model <- lm(state_envy_composite ~ game_condition_coded + total_dispositional_envy, data = data_complete)
+
+# Get adjusted means
+emm <- emmeans(ancova_model, "game_condition_coded")
+
+# Convert to data frame for plotting
+emm_df <- as.data.frame(emm)
+emm_df$game_condition <- factor(emm_df$game_condition_coded, labels = c("Loser", "Winner"))
+
+# Prepare raw data for jitter
+data_complete$game_condition <- factor(data_complete$game_condition_coded, labels = c("Loser", "Winner"))
+
+# Plot
+ggplot() +
+  # Jittered raw data
+  geom_jitter(data = data_complete, 
+              aes(x = game_condition, y = state_envy_composite),
+              width = 0.15, alpha = 0.5, color = "darkgray") +
+  # Bars for adjusted means
+  geom_bar(data = emm_df, 
+           aes(x = game_condition, y = emmean), 
+           stat = "identity", alpha = 0.6, width = 0.5) +
+  # Error bars for 95% CI
+  geom_errorbar(data = emm_df, 
+                aes(x = game_condition, ymin = lower.CL, ymax = upper.CL), 
+                width = 0.2, color = "black") +
+  labs(x = "Game Condition", y = "Adjusted State Envy",
+       title = "Adjusted State Envy by Game Condition (Controlling for Dispositional Envy)") +
+  theme_minimal(base_size = 12)
+```
 
 ### Exploratory analyses
+#### Group differences in state envy by game condition
+Some of the research I am interested in conducting is disentangling envy and anger. I was curious how much this paradigm increased anger. Using the Recalibration Theory of anger (Sell, 2011), anger is understood to be trigger when someone imposes a cost onto us. I would predict that this game would not produce anger since the winner is produced by random chance rather than some kind of transgression or fairness violation. I will conduct some exploratory analyses to understand how the game conditions impact anger. 
+```{r}
+#Random Chance Resource Distribution on Anger?
 
-Any follow-up analyses desired (not required).  
+# state anger composite 
+data_complete$state_anger_composite <- rowMeans(
+  data_complete[, c("DV2_emotion_anger",
+                    "DV2_emotion_anger_2")],
+  na.rm = TRUE
+)
+
+##density plot 
+ggplot(data_complete, aes(x = state_anger_composite, fill = factor(game_condition_coded))) +
+  geom_density(alpha = 0.5) + 
+  labs(
+    x = "Game Condition (0 = Loser, 1 = Winner)",
+    y = "State Anger Composite",
+    title = "State Anger by Game Condition", 
+    fill = "Game Condition"
+  ) +
+  theme_minimal() + 
+  theme(plot.title = element_text(hjust = 0.75)) +
+  scale_fill_discrete(labels = c("Loser", "Winner"))
+
+
+summary(lm(data=data_complete, state_anger_composite ~ game_condition_coded))
+
+t.test(data=data_complete, state_anger_composite ~ game_condition_coded)
+
+#violin plot
+anger_violin <- ggplot(data_complete, aes(x = factor(game_condition_coded), y = state_anger_composite)) +
+  geom_violin(fill = "lightblue", alpha = 0.7, color = "darkblue") +  # distribution
+  geom_jitter(width = 0.1, size = 3, alpha = 0.5, color = "darkred") + # individual points
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 4, color = "black") + # mean
+  labs(
+    x = "Game Condition (0 = Loser, 1 = Winner)",
+    y = "State Anger Composite",
+    title = "State Anger by Game Condition"
+  ) +
+  theme_minimal()+
+  theme(plot.title = element_text(hjust = 0.5)) + 
+  stat_compare_means(method = "t.test", label = "p.signif", size = 8, 
+                     label.y = max(data_complete$state_anger_composite)-.3, 
+                     label.x = 1.5)
+
+anger_violin 
+
+ggsave("anger_violin.png", plot = anger_violin, width = 6, height = 4, units = "in", dpi = 300)
+
+
+summary(lm(state_anger_composite ~ state_envy_composite + total_dispositional_envy, data = data_complete))
+
+#visualizations of corr relationship between state envy and anger, split by condition
+corr_envyXanger <- ggplot(data = data_complete, mapping = aes(x = state_anger_composite, y=state_envy_composite, color = factor(game_condition_coded))) +
+  geom_jitter(alpha=.3, size = 3) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    x = "State Anger", 
+    y = "State Envy", 
+    title = "The Relationship Between State Anger and State Envy", 
+    color = "Game Codition"
+    ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.title = element_text(hjust = 0.75))
+
+ggsave("angerXenvy.png", plot = corr_envyXanger, width = 8, height = 6, units = "in", dpi = 300)
+
+
+
+## Does game condition still predict anger (or envy) when controlling for envy (or anger)
+summary(lm(data=data_complete, state_anger_composite ~ game_condition_coded * state_envy_composite))
+
+summary(lm(data=data_complete, state_envy_composite ~ game_condition_coded * state_anger_composite))
+
+
+# Create summary scores (mean, sd, ci95)
+summary_emotions <- data_complete %>%
+  pivot_longer(
+    cols = c(state_envy_composite, state_anger_composite),
+    names_to = "emotion",
+    values_to = "score"
+  ) %>%
+  group_by(game_condition_coded, emotion) %>%
+  summarize(
+    mean_value = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE),
+    n = sum(!is.na(score)),
+    se = sd / sqrt(n),
+    ci95 = 1.96 * se,
+    .groups = "drop"
+  )
+
+summary_emotions
+
+# Bar Plot Mean Emotion Scores Between Game Conditions
+ggplot(summary_emotions,
+       aes(x = factor(game_condition_coded),
+           y = mean_value,
+           fill = emotion)) +
+  geom_col(position = position_dodge(width = 0.9)) +
+  geom_errorbar(aes(ymin = mean_value - ci95,
+                    ymax = mean_value + ci95),
+                position = position_dodge(width = 0.9),
+                width = 0.2) +
+  labs(
+    title = "Mean Envy and Anger by Game Condition (with 95% CIs)",
+    x = "Game Condition",
+    y = "Mean Score",
+    fill = "Emotion"
+  ) +
+  scale_fill_manual(values = c("red", "turquoise"),
+                    labels = c("Anger", "Envy")) +
+  scale_x_discrete(labels = c("Losers (0)", "Winners (1)")) +
+  theme_bw(base_size = 14)
+
+
+
+
+```
+To examine the effects of the game on state anger, a Welch’s t-test revealed that losers reported significantly higher anger ($M = 0.70, SD = 1.20$) than winners ($M = 0.06, SD = 0.21$), `r apa_print(t.test(data=data_complete, state_anger_composite ~ game_condition_coded))$statistic`. 
+Next, we examined the relationship between state envy and anger. Regression analyses revealed that state envy significantly predicted anger,`r apa_print(lm(state_anger_composite ~ state_envy_composite + total_dispositional_envy, data = data_complete))$full_result["state_envy_composite"]`, controlling for dispositional envy. When both state envy and game condition were included in the model, game condition no longer significantly predicted anger (`r apa_print(lm(data=data_complete, state_anger_composite ~ game_condition_coded + state_envy_composite))$full_result["game_condition_coded"]`), suggesting that the initial effect of game condition on anger is likely attributable to its strong association with situational envy. The interaction for was excluded from the model because it was insignificant. Conversely, game condition remained a significant predictor of envy,`r apa_print(lm(data=data_complete, state_envy_composite ~ game_condition_coded + state_anger_composite))$full_result["game_condition_coded"]`, and 
+state anger significantly predicted state envy, `r lm(data=data_complete, state_envy_composite ~ game_condition_coded + state_anger_composite)$full_result["state_anger_composite"]`. Interaction terms with game condition were nonsignificant in both regressions (all p > .2), indicating that the relationship between envy and anger did not differ between winners and losers.
+
+Together, these results suggest that the game elicited higher anger among losers, but this effect is largely explained by situational envy rather than game outcome alone. These patterns are consistent with Recalibration Theory (Sell, 2011), which posits that anger primarily arises in response to perceived costs imposed by others rather than random outcomes.
+
+####Game Condition on Situation Attributions
+```{r}
+#library
+library(dplyr)
+library(ggplot2)
+library(emmeans)
+library(tidyr)
+
+# --- transform reverse coded DVs ---
+# Identify reverse-coded items
+rev_vars <- c(
+  "DV1_appraisal_deservingness_other_rev", 
+  "DV1_appraisal_deservingness_self_rev", 
+  "DV1_pleasantness_rev",
+  "DV1_outcome_probability_rev",
+  "DV1_reward_valence_rev"
+)
+
+max_scale <- 6
+
+data_complete <- data_complete %>%
+  mutate(across(all_of(rev_vars), ~ max_scale - .x))
+
+# --- create different appraisal composites ---
+data_complete <- data_complete %>%
+  mutate(
+    # Fairness / justice composite (higher = more fair)
+    appraisal_fairness_composite = rowMeans(
+      select(., DV1_appraisal_fairness, DV1_appraisal_injustice,
+            DV1_appraisal_deservingness_other_rev, DV1_appraisal_deservingness_self_rev),
+            na.rm = TRUE
+        ),
+    
+    # Valence / pleasantness composite (higher = more positive)
+    appraisal_valence_composite = rowMeans(
+      select(., DV1_appraisal_valence, DV1_pleasantness_rev, DV1_reward_valence_rev, 
+             DV1_appraisal_self_relevance),
+             na.rm = TRUE
+        ),
+    
+    # Control / probability composite (higher = more controllable / deterministic)
+    appraisal_control_composite = rowMeans(
+      select(., DV1_controllability, DV1_outcome_probability_rev),
+             na.rm = TRUE
+        )
+  )
+
+## --- summary statistics for the composites --- 
+summary_appraisals <- data_complete %>%
+  pivot_longer(
+    cols = c(appraisal_fairness_composite, appraisal_valence_composite,
+             appraisal_control_composite),
+    names_to = "appraisal_type",
+    values_to = "score"
+  ) %>%
+  group_by(game_condition_coded, appraisal_type) %>%
+  summarize(
+    mean_score = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE),
+    n = sum(!is.na(score)),
+    se = sd / sqrt(n),
+    ci95 = 1.96 * se,
+    .groups = "drop"
+  )
+
+summary_appraisals
+
+## -- compare appraisal types by group using ANCOVA (control for disp envy)
+
+summary(lm(appraisal_fairness_composite ~ game_condition_coded, data = data_complete))
+# no difference in the fairness judgements between conditions 
+
+
+summary(lm(appraisal_valence_composite ~ game_condition_coded, data = data_complete))
+# winners report more positive outcomes 
+
+summary(lm(appraisal_control_composite ~ game_condition_coded, data = data_complete))
+# winners report more control over outcome 
+```
+Game condition significantly influenced several appraisal outcomes. For the composite scores, winners rated outcomes as more positive (`r apa_print(lm(appraisal_valence_composite ~ game_condition_coded, data = data_complete))$full_result["game_condition_coded"]`) than losers. Winners also perceived themselves as having slightly more control over the outcome (`r apa_print(lm(appraisal_control_composite ~ game_condition_coded, data = data_complete))$full_result["game_condition_coded"]`) than losers did. There was no difference in the fairness or deservedness ratings between groups. This likely reflects the random nature of the game. Visualizations of the differences between groups for all of the appraisal items and for the composites can be seen below. 
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+##visualizations of appraisals 
+#Pivot DV1 items to long format
+dv1_long <- data_complete %>%
+  pivot_longer(
+    cols = starts_with("DV1_"),
+    names_to = "DV1_item",
+    values_to = "score"
+  )
+
+# Compute mean by item and game condition
+dv1_summary <- dv1_long %>%
+  group_by(DV1_item, game_condition_coded) %>%
+  summarize(
+    mean_score = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE),
+    n = sum(!is.na(score)),
+    se = sd / sqrt(n),
+    ci95 = 1.96 * se,
+    .groups = "drop"
+  )
+
+# Plot
+ggplot(dv1_summary, aes(x = DV1_item, y = mean_score, fill = factor(game_condition_coded))) +
+  geom_col(position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_score - ci95, ymax = mean_score + ci95),
+                position = position_dodge(width = 0.8), width = 0.2) +
+  labs(
+    title = "Mean DV1 Appraisals by Game Condition",
+    x = "Item",
+    y = "Mean Score",
+    fill = "Game Condition"
+  ) +
+  scale_fill_manual(values = c("lightblue", "darkblue"), labels = c("Loser (0)", "Winner (1)")) +
+  theme_bw(base_size = 10) +
+  theme(axis.text.x = element_text(angle = 50, hjust = 1))
+
+## for composite 
+# Pivot composites to long format
+composite_long <- data_complete %>%
+  pivot_longer(
+    cols = c(appraisal_fairness_composite, appraisal_valence_composite,
+             appraisal_control_composite),
+    names_to = "composite",
+    values_to = "score"
+  )
+
+# Compute mean, SE, CI
+composite_summary <- composite_long %>%
+  group_by(composite, game_condition_coded) %>%
+  summarize(
+    mean_score = mean(score, na.rm = TRUE),
+    sd = sd(score, na.rm = TRUE),
+    n = sum(!is.na(score)),
+    se = sd / sqrt(n),
+    ci95 = 1.96 * se,
+    .groups = "drop"
+  )
+
+# Plot
+ggplot(composite_summary, aes(x = composite, y = mean_score, fill = factor(game_condition_coded))) +
+  geom_col(position = position_dodge(width = 0.8)) +
+  geom_errorbar(aes(ymin = mean_score - ci95, ymax = mean_score + ci95),
+                position = position_dodge(width = 0.8), width = 0.2) +
+  labs(
+    title = "Appraisal Composites by Game Condition",
+    x = "Composite",
+    y = "Mean Score",
+    fill = "Game Condition"
+  ) +
+  scale_fill_manual(values = c("orangered", "turquoise"), labels = c("Loser (0)", "Winner (1)")) +
+  theme_bw(base_size = 12) +
+  theme(axis.text.x = element_text(angle = 33, hjust = 1))
+
+```
 
 ## Discussion
 
 ### Summary of Replication Attempt
 
-Open the discussion section with a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+The primary result successfully replicated the original finding. Participants who did not receive the reward reported significantly higher envy toward their partner than those who did receive the reward, even when controlling for anger. This mirrors the pattern observed in the original study. Additionally, the original study reported a strong positive relationship between dispositional and situational envy. Our results align with this finding, indicating that individuals with higher dispositional envy experience greater envy in upward comparison situations. Overall, these results replicate the key findings of the original study and suggest that this paradigm can be effectively extended to an online format.
 
 ### Commentary
 
-Add open-ended commentary (if any) reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.  None of these need to be long.
+People experience envy in situations where someone possesses something they desire, and the intensity of this emotion may vary depending on individual dispositions. This study replicates previous findings that the Dispositional State Envy Scale (DSES) is a valid measure of dispositional envy and provides evidence that this paradigm can be used to evoke envy in online formats.
+
+One concern in designing this study was whether the game of rock-paper-scissors could serve as a reliable paradigm for eliciting envy. A common challenge with envy paradigms is the specificity of the targeted emotion. While upward social comparison often evokes envy, it can also trigger related emotions such as anger, sadness, inequity aversion, or general negative affect (Parrott, 1991). Our exploratory analyses provide some support for the envy-specificity of this design: the game condition did not significantly affect anger when controlling for envy, and there were no significant group differences in appraisals related to fairness.
+
+Moving forward, I aim to extend this research to further establish that the observed effects are specific to envy rather than inequity aversion (i.e., feeling sensitive towards disadvantageous inequity, not envious). Additionally, I hope to gain deeper insights into the differences in cognitive appraisals between envy and anger—a topic I am currently pursuing in my graduate research.
+
+
+
+## References 
+Parrott, W. G. (1991). Experiences of envy and jealousy. The psychology of jealousy and envy, 1991, 3-30.
+
+Patel, M., Bullinaria, J. A., & Levy, J. P. (1997). Extracting semantic representations from large text corpora. In J. A. Bullinaria, D. W. Glasspool, & G. Houghton (Eds.), Fourth Neural Computation and Psychology Workshop: Connectionist Representations (pp. 199-212). London: Springer.
+
+Rentzsch, K., & Gross, J. J. (2015). Who Turns Green with Envy? Conceptual and Empirical Perspectives on Dispositional Envy. European Journal of Personality, 29(5), 530–547. https://doi.org/10.1002/per.2012
+
+
+Rentzsch, K., Giese, A.-K., Hebel, V., & Lösch, T. (2023). Personality and Emotions in Social Interactions – The PESI Project. Personality Science, 4(1), e8241. https://doi.org/10.5964/ps.8241
+
+
+Sell, A. N. (2011). The recalibrational theory and violent anger. Aggression and Violent Behavior, 16(5), 381–389. https://doi.org/10.1016/j.avb.2011.04.013
+
