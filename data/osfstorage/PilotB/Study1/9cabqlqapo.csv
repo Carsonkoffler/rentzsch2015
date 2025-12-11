@@ -1,0 +1,129 @@
+"success","timeout","failed_images","failed_audio","failed_video","trial_type","trial_index","plugin_version","time_elapsed","subject_id","experiment_date","prolific_id_last4","study_id","session_id","version","random_condition","participant_name","task","rt","stimulus","response","round","player_choice","computer_choice","result","question_order"
+"true","false","[]","[]","[]","preload","0","2.0.0","1493","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","","","","","","","",""
+"","","","","","html-button-response","1","2.0.0","8824","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","consent","7328","
+    <p style = ""text-align: start; margin-right: 50px; margin-left: 50px""> You are being invited to participate in a research study titled “Reproducibility of Psychological Science and Instruction.”<br><br>This study is being done by Dr. Bria Long from UC San Diego and associated graduate students in Experimental Methods course.<br><br>You were selected to participate in this study because you are an adult in the U.S. and have been a represented population in previous psychology studies.
+    The purpose of this study is to better understand how well previously published studies in the psychological field replicate online and with different populations. Your participation in this research should last approximately 5-30 minutes  If you agree to take part in this study, you may be asked to view a set of stimuli, including pictures, sounds, written text, or videos and then giving some responses via key-presses, verbally, or with paper-and-pencil. We may also observe your choices or preferences among an array of stimuli.  These stimuli will be taken directly from or closely adapted from studies that already exist in the published psychological literature. Stimuli will include, e.g., pictures of objects and human faces, audio and video clips, short text passages, etc. None of the stimuli will be disturbing, threatening, or offensive. The online and in-person experiments described in this protocol will take no more than 30 minutes. An example game you might play would be to click on an image on the screen that matches a word you hear being said out loud. Your total expected time commitment for this study is between 5-30 minutes, and is specified in the study description.
+    Your participation in this study is completely voluntary and you can withdraw at any time. Choosing not to participate or withdrawing will result in no penalty or loss of benefits to which you are entitled. You are free to skip any question that you choose.
+    We will not be asking for any personally identifying information, and we will handle responses as confidentially as possible. Your SONA or Prolific IDs will never be tied to your responses on this survey. However, we cannot guarantee the confidentiality of information transmitted over the Internet. To minimize this risk, data containing anything that might be personally identifiable (e.g. Prolific IDs or IP addresses) will be encrypted on transfer and storage and will only be accessible to qualified lab personnel. We will be keeping data collected as part of this experiment indefinitely. This anonymized data (containing neither Prolific IDs nor IP addresses) may be shared with the scientific community or with other participants to be used as stimuli in future studies.<br><br>
+    If you have questions about this project or if you have a research-related problem, you may contact the researcher(s),  Dr. Bria Long, brlong@ucsd.edu. If you have any questions concerning your rights as a research subject, you may contact the UC San Diego Office of IRB Administration at irb@ucsd.edu or 858-246-4777. <br><br>
+    By participating in this research you are indicating that you are at least 18 years old, have read this consent form, and agree to participate in this research study. Please keep this consent form for your records. </p>","0","","","","",""
+"","","","","","html-keyboard-response","2","2.0.0","149311","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","140480","<p style=""text-align:start; width: 1000"">Thank you for choosing to participate. We are studying how people make decisions under uncertainty.</p>
+               <p style=""text-align:start; width: 1000"">You'll first play a quick game to test decision-making strategies. Your performance in this game will determine a small monetary bonus. <br>Afterwards, you'll complete a semantic categorization task to measure how decisions are made with access to more information.<br>
+               <p><i>Press the spacebar to begin.</i></p>"," ","","","","",""
+"","","","","","survey-text","3","2.0.0","220403","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","71037","","{""Q0"":""UDOW""}","","","","",""
+"","","","","","html-keyboard-response","4","2.0.0","314163","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","93756","
+      <h2>Instructions</h2>
+      <p style = ""text-align: start; width: 1000"">For this experiment, you will be randomly paired with another participant to play a game of rock, paper, scissors. You will be paired with the same person for the entire game</p>
+      <p style = ""text-align: start; width: 1000"">You will first complete three practice rounds to get familiar with the game interface.</p>
+      <p style = ""text-align: start; width: 1000"">The rules of the game are simple:</p>
+      <ol style =""list-style-type=decimal; list-style-position:inside;padding-left:0; display=inline-block; text-align: start"">
+        <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li>
+      </ol>
+      <p style = ""text-align: start; width: 1000"">After you select your move, there will be a short countdown before both choices are revealed.</p>
+      <p style = ""text-align: start; width: 1000"">No points will be rewarded for the practice round. After three rounds, the real round of rock, paper, scissors will begin.</p>
+      <p style = ""text-align: start; width: 1000""><b>The winner of the real round will receive a monetary reward of $1.</b></p>
+      <p><i>Press the spacebar to begin the practice rounds.</i></p>
+    "," ","","","","",""
+"","","","","","html-keyboard-response","5","2.0.0","324169","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","null","<div style=""text-align:center;"">
+               <p><b>...Pairing...</b></p>
+               <p style = ""font-size:small""> Finding a partner to pair you with. We apologize for any delay.</p>
+               <img src =""exp_code/Images/Loading_icon.gif"" width='200' alt='Loading...'>
+               </div>
+               ","null","","","","",""
+"","","","","","html-keyboard-response","6","2.0.0","347043","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","22872","<p>Your opponent for this game is <b>Bria</b>. Good luck!</p>
+               <p><i>Press the spacebar to continue.</i></p>"," ","","","","",""
+"","","","","","html-button-response","7","2.0.0","361732","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","14688","<p><b>Round 1</b><br>Choose your move:</p>","1","1","Paper","","",""
+"","","","","","html-keyboard-response","8","2.0.0","366338","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","null","<p>Waiting for Bria to choose...</p>","null","","","","",""
+"","","","","","html-keyboard-response","9","2.0.0","369539","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","null","<p style=""font-size:48px; font-weight:bold;"">3...</p>","null","","","Paper","tie",""
+"","","","","","html-keyboard-response","10","2.0.0","378616","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","9076","
+          <div style=""display:flex; justify-content:center; align-items:center; gap:60px;"">
+            <div style=""text-align:center;"">
+              <p><b>UDOW chose:</b></p>
+              <img src='exp_code/Images/Paper_Participant.png' width='300'>
+            </div>
+            <div style=""text-align:center;"">
+              <p><b>Bria chose:</b></p>
+              <img src='exp_code/Images/Paper_Computer.png' width='300'>
+            </div>
+          </div>
+        <p style=""font-size:24px;""><b>It's a tie!</b></p><p style='font-size:small;'>Press the spacebar to continue.</p>"," ","","","","",""
+"","","","","","html-button-response","11","2.0.0","380898","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","2281","<p><b>Round 2</b><br>Choose your move:</p>","2","2","Scissors","","",""
+"","","","","","html-keyboard-response","12","2.0.0","384376","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","null","<p>Waiting for Bria to choose...</p>","null","","","","",""
+"","","","","","html-keyboard-response","13","2.0.0","387582","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","null","<p style=""font-size:48px; font-weight:bold;"">3...</p>","null","","","Paper","player",""
+"","","","","","html-keyboard-response","14","2.0.0","396799","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","9215","
+          <div style=""display:flex; justify-content:center; align-items:center; gap:60px;"">
+            <div style=""text-align:center;"">
+              <p><b>UDOW chose:</b></p>
+              <img src='exp_code/Images/Scissors_Participant.png' width='300'>
+            </div>
+            <div style=""text-align:center;"">
+              <p><b>Bria chose:</b></p>
+              <img src='exp_code/Images/Paper_Computer.png' width='300'>
+            </div>
+          </div>
+        <p style=""font-size:24px; color:green;""><b>UDOW wins this round!</b></p><p style='font-size:small;'>Press the spacebar to continue.</p>"," ","","","","",""
+"","","","","","html-button-response","15","2.0.0","402050","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","5249","<p><b>Round 3</b><br>Choose your move:</p>","2","3","Scissors","","",""
+"","","","","","html-keyboard-response","16","2.0.0","408893","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","null","<p>Waiting for Bria to choose...</p>","null","","","","",""
+"","","","","","html-keyboard-response","17","2.0.0","412097","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","null","<p style=""font-size:48px; font-weight:bold;"">3...</p>","null","","","Paper","player",""
+"","","","","","html-keyboard-response","18","2.0.0","418367","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","6267","
+          <div style=""display:flex; justify-content:center; align-items:center; gap:60px;"">
+            <div style=""text-align:center;"">
+              <p><b>UDOW chose:</b></p>
+              <img src='exp_code/Images/Scissors_Participant.png' width='300'>
+            </div>
+            <div style=""text-align:center;"">
+              <p><b>Bria chose:</b></p>
+              <img src='exp_code/Images/Paper_Computer.png' width='300'>
+            </div>
+          </div>
+        <p style=""font-size:24px; color:green;""><b>UDOW wins this round!</b></p><p style='font-size:small;'>Press the spacebar to continue.</p>"," ","","","","",""
+"","","","","","html-button-response","19","2.0.0","446042","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","27673","
+      <h1 style = ""text-align: center""><b>Practice rounds complete!</b></h1>
+      <p style = ""text-align: start"">Now that you have finished the practice rounds, do you feel like you understand how to play Rock, Paper, Scissors?</p>
+      <p style = ""text-align: start"">If not, the instructions will be displayed again before the main game.</p>
+    ","0","","","","",""
+"","","","","","html-keyboard-response","20","2.0.0","453511","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","7468","
+        <h2>Final Round Instructions</h2>
+        <p style = ""text-align: start"">You and your opponent, Bria, will now proceed to the <b>final round</b> of Rock, Paper, Scissors.</p>
+        <p style = ""text-align: start"">There will only be <b> one round </b> to determine the winner. If there is a tie, the round will be played until there is a winner.</p>
+        <p style = ""text-align: start"">Remember the winner of the round will receive a reward of $1.</p>
+        <p style = ""text-align: start"">In case you forgot, the rules are below: </p>
+        <ol style =""list-style-type=decimal; list-style-position:inside;padding-left:10px; display=inline-block; text-align: start"">
+            <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li></ol>
+        <p style = ""text-align: start"">Good luck!</p>
+        <p><i>Press the spacebar to begin the final round.</i></p>
+        "," ","","","","",""
+"","","","","","html-button-response","21","2.0.0","457548","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","4035","<p><b>Main Game</b><br>Choose your move:</p>","2","","Scissors","","",""
+"","","","","","html-keyboard-response","22","2.0.0","463930","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","null","<p>Waiting for Bria to choose...</p>","null","","","","",""
+"","","","","","html-keyboard-response","23","2.0.0","467136","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","null","<p style=""font-size:48px; font-weight:bold;"">3...</p>","null","","","Paper","player",""
+"","","","","","html-keyboard-response","24","2.0.0","473769","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","6631","
+            <div style=""display:flex; justify-content:center; align-items:center; gap:60px;"">
+                <div style=""text-align:center;"">
+                <p><b>UDOW chose:</b></p>
+                <img src='exp_code/Images/Scissors_Participant.png' width='300'>
+                </div>
+                <div style=""text-align:center;"">
+                <p>Bria chose:</b></p>
+                <img src='exp_code/Images/Paper_Computer.png' width='300'>
+                </div>
+            </div>
+            <p style=""font-size:24px; color:green;""><b>UDOW wins this round!</b> UDOW wins $1.</p><p><i>Press the spacebar to continue.</i></p>"," ","","","","",""
+"","","","","","html-button-response","25","2.0.0","482883","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","9112","<p>Who won the last round you played?</p>","0","","","","",""
+"","","","","","html-keyboard-response","26","2.0.0","528907","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","46021","
+        <p style = ""text-align: start; margin-left: 20px; margin-right: 20px""> Thank you! Now, you will complete a short task to see how competition impacts word groupings.</p>
+        <p style = ""text-align: start; margin-left: 20px; margin-right: 20px""> In this task, you will see a set of 10 words. Your job is to select which category the set of words belong to.</p>
+        <p style = ""text-align: start; margin-left: 20px; margin-right: 20px""> For example, if the set of words are: 
+        <br><br> Dog, Cat, Elephant, Tiger, Lion, Bear, Wolf, Fox, Giraffe, Zebra <br><br> 
+        a. Animals<br>b. Colors<br>c. Names <br>d. Pets<br><br>
+        You would select ""Animals"" from the multiple choice list as the category.</p>
+        <p><i> Press the spacebar to begin the task.</i></p>
+    "," ","","","","",""
+"","","","","","survey-multi-choice","27","2.1.0","600783","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","71872","","{""filler_1"":""Fruits"",""filler_2"":""Jewels"",""filler_3"":""Family Members"",""filler_4"":""Body Parts"",""filler_5"":""Kitchen Utensils""}","","","","","[2,4,0,1,3]"
+"","","","","","survey-likert","28","2.0.0","812947","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","212154","","{""DV1_appraisal_fairness"":6,""DV1_appraisal_injustice"":5,""DV1_appraisal_deservingness_other_rev"":6,""DV1_appraisal_valence"":6,""DV1_appraisal_self_relevance"":6,""DV1_appraisal_deservingness_self_rev"":0,""DV1_pleasantness_rev"":0,""DV1_controllability"":6,""DV1_outcome_probability_rev"":1,""DV1_reward_valence_rev"":0}","","","","","[0,1,2,3,4,5,6,7,8,9]"
+"","","","","","survey-likert","29","2.0.0","927704","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","114877","","{""DV2_emotion_self_satisfaction"":6,""DV2_emotion_jealousy"":0,""DV2_emotion_anger"":0,""DV2_emotion_admiration"":4,""DV2_emotion_worthlessness"":0,""DV2_emotion_envy"":0,""DV2_emotion_resentment"":0,""DV2_emotion_pride_other"":4,""DV2_emotion_jealousy_2"":0,""DV2_emotion_shame"":0,""DV2_emotion_envy_2"":0,""DV2_emotion_anger_2"":0}","","","","","[0,1,2,3,4,5,6,7,8,9,10,11]"
+"","","","","","survey-multi-choice","30","2.1.0","965993","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","38288","","{""DV3_outcome_attribution"":""My luck during the game.""}","","","","","[0]"
+"","","","","","survey-likert","31","2.0.0","1158420","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","192422","","{""DV5_DSES_1_Attraction"":0,""DV5_DSES_2_Competence"":0,""DV5_DSES_3_Wealth"":0,""DV5_DSES_4_Attraction"":0,""DV5_DSES_5_Competence"":0,""DV5_DSES_6_Wealth"":0,""DV5_DSES_7_Attraction"":0,""DV5_DSES_8_Competence"":0,""DV5_attention_check"":6,""DV5_DSES_9_Wealth"":0,""DV5_DSES_10_Attraction"":0,""DV5_DSES_11_Competence"":0,""DV5_DSES_12_Wealth"":0,""DV5_DSES_13_Attraction"":0,""DV5_DSES_14_Competence"":0,""DV5_DSES_15_Wealth"":0}","","","","","[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"
+"","","","","","survey-multi-choice","32","2.1.0","1169045","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","10624","","{""demo_gender"":""Male""}","","","","","[0]"
+"","","","","","survey-text","33","2.0.0","1201891","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","32834","","{""age"":""53""}","","","","",""
+"","","","","","survey-likert","34","2.0.0","1232620","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","30728","","{""attention_check_3"":4}","","","","","[0]"
+"","","","","","survey-text","35","2.0.0","1348139","9cabqlqapo","2025-11-21","95b1","6920dfee728c34f6fd2fdeb0","6920e343c1a6a261ffc82646","Study1","winner","UDOW","","115511","","{""funnel_1"":""This study seems to be about how people make decisions under uncertainty, how they respond to winning or losing in a competitive game, and how they categorize information. It also appears to measure emotions and reactions toward others in a competitive context."",""funnel_2"":""They might be testing whether winning or losing a game affects people’s emotions toward others, their sense of fairness, and how competition influences decision-making and categorization of information."",""comments"":""It was clear and easy to follow. The game was simple and engaging, and the word categorization task was straightforward. Overall, it was a short and well-structured study.""}","","","","",""
