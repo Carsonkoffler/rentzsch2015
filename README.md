@@ -4,7 +4,7 @@ This is a guide to the repository for the replication of Pelz et al., 2022.
 
 ## Experiment Stimuli
 
-The full JsPsych code can be found under index.html in the main folder.
+Stimuli can be found in the exp_code/images folder. The full JsPsych code can be found under index.html in the main folder.
 
 ## Data
 
