@@ -1,0 +1,129 @@
+"success","timeout","failed_images","failed_audio","failed_video","trial_type","trial_index","plugin_version","time_elapsed","subject_id","experiment_date","prolific_id_last4","study_id","session_id","version","random_condition","participant_name","task","rt","stimulus","response","round","player_choice","computer_choice","result","question_order"
+"true","false","[]","[]","[]","preload","0","2.0.0","325","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","","","","","","","",""
+"","","","","","html-button-response","1","2.0.0","5907","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","consent","5577","
+    <p style = ""text-align: start; margin-right: 50px; margin-left: 50px""> You are being invited to participate in a research study titled “Reproducibility of Psychological Science and Instruction.”<br><br>This study is being done by Dr. Bria Long from UC San Diego and associated graduate students in Experimental Methods course.<br><br>You were selected to participate in this study because you are an adult in the U.S. and have been a represented population in previous psychology studies.
+    The purpose of this study is to better understand how well previously published studies in the psychological field replicate online and with different populations. Your participation in this research should last approximately 5-30 minutes  If you agree to take part in this study, you may be asked to view a set of stimuli, including pictures, sounds, written text, or videos and then giving some responses via key-presses, verbally, or with paper-and-pencil. We may also observe your choices or preferences among an array of stimuli.  These stimuli will be taken directly from or closely adapted from studies that already exist in the published psychological literature. Stimuli will include, e.g., pictures of objects and human faces, audio and video clips, short text passages, etc. None of the stimuli will be disturbing, threatening, or offensive. The online and in-person experiments described in this protocol will take no more than 30 minutes. An example game you might play would be to click on an image on the screen that matches a word you hear being said out loud. Your total expected time commitment for this study is between 5-30 minutes, and is specified in the study description.
+    Your participation in this study is completely voluntary and you can withdraw at any time. Choosing not to participate or withdrawing will result in no penalty or loss of benefits to which you are entitled. You are free to skip any question that you choose.
+    We will not be asking for any personally identifying information, and we will handle responses as confidentially as possible. Your SONA or Prolific IDs will never be tied to your responses on this survey. However, we cannot guarantee the confidentiality of information transmitted over the Internet. To minimize this risk, data containing anything that might be personally identifiable (e.g. Prolific IDs or IP addresses) will be encrypted on transfer and storage and will only be accessible to qualified lab personnel. We will be keeping data collected as part of this experiment indefinitely. This anonymized data (containing neither Prolific IDs nor IP addresses) may be shared with the scientific community or with other participants to be used as stimuli in future studies.<br><br>
+    If you have questions about this project or if you have a research-related problem, you may contact the researcher(s),  Dr. Bria Long, brlong@ucsd.edu. If you have any questions concerning your rights as a research subject, you may contact the UC San Diego Office of IRB Administration at irb@ucsd.edu or 858-246-4777. <br><br>
+    By participating in this research you are indicating that you are at least 18 years old, have read this consent form, and agree to participate in this research study. Please keep this consent form for your records. </p>","0","","","","",""
+"","","","","","html-keyboard-response","2","2.0.0","10111","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","4199","<p style=""text-align:start; width: 1000"">Thank you for choosing to participate. We are studying how people make decisions under uncertainty.</p>
+               <p style=""text-align:start; width: 1000"">You'll first play a quick game to test decision-making strategies. Your performance in this game will determine a small monetary bonus. <br>Afterwards, you'll complete a semantic categorization task to measure how decisions are made with access to more information.<br>
+               <p><i>Press the spacebar to begin.</i></p>"," ","","","","",""
+"","","","","","survey-text","3","2.0.0","49668","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","39495","","{""Q0"":""6780a03e84f574b4185e3f97""}","","","","",""
+"","","","","","html-keyboard-response","4","2.0.0","171179","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","121505","
+      <h2>Instructions</h2>
+      <p style = ""text-align: start; width: 1000"">For this experiment, you will be randomly paired with another participant to play a game of rock, paper, scissors. You will be paired with the same person for the entire game</p>
+      <p style = ""text-align: start; width: 1000"">You will first complete three practice rounds to get familiar with the game interface.</p>
+      <p style = ""text-align: start; width: 1000"">The rules of the game are simple:</p>
+      <ol style =""list-style-type=decimal; list-style-position:inside;padding-left:0; display=inline-block; text-align: start"">
+        <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li>
+      </ol>
+      <p style = ""text-align: start; width: 1000"">After you select your move, there will be a short countdown before both choices are revealed.</p>
+      <p style = ""text-align: start; width: 1000"">No points will be rewarded for the practice round. After three rounds, the real round of rock, paper, scissors will begin.</p>
+      <p style = ""text-align: start; width: 1000""><b>The winner of the real round will receive a monetary reward of $1.</b></p>
+      <p><i>Press the spacebar to begin the practice rounds.</i></p>
+    "," ","","","","",""
+"","","","","","html-keyboard-response","5","2.0.0","181198","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","null","<div style=""text-align:center;"">
+               <p><b>...Pairing...</b></p>
+               <p style = ""font-size:small""> Finding a partner to pair you with. We apologize for any delay.</p>
+               <img src =""exp_code/Images/Loading_icon.gif"" width='200' alt='Loading...'>
+               </div>
+               ","null","","","","",""
+"","","","","","html-keyboard-response","6","2.0.0","190834","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","9633","<p>Your opponent for this game is <b>Thomas</b>. Good luck!</p>
+               <p><i>Press the spacebar to continue.</i></p>"," ","","","","",""
+"","","","","","html-button-response","7","2.0.0","201828","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","10987","<p><b>Round 1</b><br>Choose your move:</p>","0","1","Rock","","",""
+"","","","","","html-keyboard-response","8","2.0.0","205918","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","null","<p>Waiting for Thomas to choose...</p>","null","","","","",""
+"","","","","","html-keyboard-response","9","2.0.0","209126","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","null","<p style=""font-size:48px; font-weight:bold;"">3...</p>","null","","","Paper","computer",""
+"","","","","","html-keyboard-response","10","2.0.0","217619","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","8490","
+          <div style=""display:flex; justify-content:center; align-items:center; gap:60px;"">
+            <div style=""text-align:center;"">
+              <p><b>6780a03e84f574b4185e3f97 chose:</b></p>
+              <img src='exp_code/Images/Rock_Participant.png' width='300'>
+            </div>
+            <div style=""text-align:center;"">
+              <p><b>Thomas chose:</b></p>
+              <img src='exp_code/Images/Paper_Computer.png' width='300'>
+            </div>
+          </div>
+        <p style=""font-size:24px; color:red;""><b>Thomas wins this round!</b></p><p style='font-size:small;'>Press the spacebar to continue.</p>"," ","","","","",""
+"","","","","","html-button-response","11","2.0.0","219298","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","1675","<p><b>Round 2</b><br>Choose your move:</p>","1","2","Paper","","",""
+"","","","","","html-keyboard-response","12","2.0.0","223019","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","null","<p>Waiting for Thomas to choose...</p>","null","","","","",""
+"","","","","","html-keyboard-response","13","2.0.0","226226","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","null","<p style=""font-size:48px; font-weight:bold;"">3...</p>","null","","","Rock","player",""
+"","","","","","html-keyboard-response","14","2.0.0","237309","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","11080","
+          <div style=""display:flex; justify-content:center; align-items:center; gap:60px;"">
+            <div style=""text-align:center;"">
+              <p><b>6780a03e84f574b4185e3f97 chose:</b></p>
+              <img src='exp_code/Images/Paper_Participant.png' width='300'>
+            </div>
+            <div style=""text-align:center;"">
+              <p><b>Thomas chose:</b></p>
+              <img src='exp_code/Images/Rock_Computer.png' width='300'>
+            </div>
+          </div>
+        <p style=""font-size:24px; color:green;""><b>6780a03e84f574b4185e3f97 wins this round!</b></p><p style='font-size:small;'>Press the spacebar to continue.</p>"," ","","","","",""
+"","","","","","html-button-response","15","2.0.0","238986","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","1674","<p><b>Round 3</b><br>Choose your move:</p>","2","3","Scissors","","",""
+"","","","","","html-keyboard-response","16","2.0.0","241916","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","null","<p>Waiting for Thomas to choose...</p>","null","","","","",""
+"","","","","","html-keyboard-response","17","2.0.0","245123","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","null","<p style=""font-size:48px; font-weight:bold;"">3...</p>","null","","","Paper","player",""
+"","","","","","html-keyboard-response","18","2.0.0","248878","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","3753","
+          <div style=""display:flex; justify-content:center; align-items:center; gap:60px;"">
+            <div style=""text-align:center;"">
+              <p><b>6780a03e84f574b4185e3f97 chose:</b></p>
+              <img src='exp_code/Images/Scissors_Participant.png' width='300'>
+            </div>
+            <div style=""text-align:center;"">
+              <p><b>Thomas chose:</b></p>
+              <img src='exp_code/Images/Paper_Computer.png' width='300'>
+            </div>
+          </div>
+        <p style=""font-size:24px; color:green;""><b>6780a03e84f574b4185e3f97 wins this round!</b></p><p style='font-size:small;'>Press the spacebar to continue.</p>"," ","","","","",""
+"","","","","","html-button-response","19","2.0.0","256514","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","7633","
+      <h1 style = ""text-align: center""><b>Practice rounds complete!</b></h1>
+      <p style = ""text-align: start"">Now that you have finished the practice rounds, do you feel like you understand how to play Rock, Paper, Scissors?</p>
+      <p style = ""text-align: start"">If not, the instructions will be displayed again before the main game.</p>
+    ","0","","","","",""
+"","","","","","html-keyboard-response","20","2.0.0","275309","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","18792","
+        <h2>Final Round Instructions</h2>
+        <p style = ""text-align: start"">You and your opponent, Thomas, will now proceed to the <b>final round</b> of Rock, Paper, Scissors.</p>
+        <p style = ""text-align: start"">There will only be <b> one round </b> to determine the winner. If there is a tie, the round will be played until there is a winner.</p>
+        <p style = ""text-align: start"">Remember the winner of the round will receive a reward of $1.</p>
+        <p style = ""text-align: start"">In case you forgot, the rules are below: </p>
+        <ol style =""list-style-type=decimal; list-style-position:inside;padding-left:10px; display=inline-block; text-align: start"">
+            <li>Rock crushes Scissors</li><li>Paper covers Rock</li><li>Scissors cut Paper</li></ol>
+        <p style = ""text-align: start"">Good luck!</p>
+        <p><i>Press the spacebar to begin the final round.</i></p>
+        "," ","","","","",""
+"","","","","","html-button-response","21","2.0.0","280134","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","4814","<p><b>Main Game</b><br>Choose your move:</p>","1","","Paper","","",""
+"","","","","","html-keyboard-response","22","2.0.0","287325","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","null","<p>Waiting for Thomas to choose...</p>","null","","","","",""
+"","","","","","html-keyboard-response","23","2.0.0","290543","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","null","<p style=""font-size:48px; font-weight:bold;"">3...</p>","null","","","Scissors","computer",""
+"","","","","","html-keyboard-response","24","2.0.0","293745","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","3198","
+            <div style=""display:flex; justify-content:center; align-items:center; gap:60px;"">
+                <div style=""text-align:center;"">
+                <p><b>6780a03e84f574b4185e3f97 chose:</b></p>
+                <img src='exp_code/Images/Paper_Participant.png' width='300'>
+                </div>
+                <div style=""text-align:center;"">
+                <p>Thomas chose:</b></p>
+                <img src='exp_code/Images/Scissors_Computer.png' width='300'>
+                </div>
+            </div>
+            <p style=""font-size:24px; color:red;""><b>Thomas wins this round!</b> Thomas wins $1.</p><p><i>Press the spacebar to continue.</i></p>"," ","","","","",""
+"","","","","","html-button-response","25","2.0.0","297104","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","3353","<p>Who won the last round you played?</p>","1","","","","",""
+"","","","","","html-keyboard-response","26","2.0.0","322312","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","25204","
+        <p style = ""text-align: start; margin-left: 20px; margin-right: 20px""> Thank you! Now, you will complete a short task to see how competition impacts word groupings.</p>
+        <p style = ""text-align: start; margin-left: 20px; margin-right: 20px""> In this task, you will see a set of 10 words. Your job is to select which category the set of words belong to.</p>
+        <p style = ""text-align: start; margin-left: 20px; margin-right: 20px""> For example, if the set of words are: 
+        <br><br> Dog, Cat, Elephant, Tiger, Lion, Bear, Wolf, Fox, Giraffe, Zebra <br><br> 
+        a. Animals<br>b. Colors<br>c. Names <br>d. Pets<br><br>
+        You would select ""Animals"" from the multiple choice list as the category.</p>
+        <p><i> Press the spacebar to begin the task.</i></p>
+    "," ","","","","",""
+"","","","","","survey-multi-choice","27","2.1.0","347353","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","25030","","{""filler_1"":""Fruits"",""filler_2"":""Jewels"",""filler_3"":""Family Members"",""filler_4"":""Body Parts"",""filler_5"":""Kitchen Utensils""}","","","","","[4,3,1,0,2]"
+"","","","","","survey-likert","28","2.0.0","434939","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","87567","","{""DV1_appraisal_fairness"":4,""DV1_appraisal_injustice"":5,""DV1_appraisal_deservingness_other_rev"":3,""DV1_appraisal_valence"":0,""DV1_appraisal_self_relevance"":3,""DV1_appraisal_deservingness_self_rev"":5,""DV1_pleasantness_rev"":5,""DV1_controllability"":0,""DV1_outcome_probability_rev"":1,""DV1_reward_valence_rev"":0}","","","","","[0,1,2,3,4,5,6,7,8,9]"
+"","","","","","survey-likert","29","2.0.0","485070","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","50115","","{""DV2_emotion_self_satisfaction"":6,""DV2_emotion_jealousy"":0,""DV2_emotion_anger"":0,""DV2_emotion_admiration"":5,""DV2_emotion_worthlessness"":0,""DV2_emotion_envy"":0,""DV2_emotion_resentment"":0,""DV2_emotion_pride_other"":5,""DV2_emotion_jealousy_2"":0,""DV2_emotion_shame"":0,""DV2_emotion_envy_2"":3,""DV2_emotion_anger_2"":0}","","","","","[0,1,2,3,4,5,6,7,8,9,10,11]"
+"","","","","","survey-multi-choice","30","2.1.0","500981","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","15907","","{""DV3_outcome_attribution"":""My luck during the game.""}","","","","","[0]"
+"","","","","","survey-likert","31","2.0.0","594616","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","93621","","{""DV5_DSES_1_Attraction"":0,""DV5_DSES_2_Competence"":0,""DV5_DSES_3_Wealth"":0,""DV5_DSES_4_Attraction"":0,""DV5_DSES_5_Competence"":4,""DV5_DSES_6_Wealth"":0,""DV5_DSES_7_Attraction"":0,""DV5_DSES_8_Competence"":0,""DV5_attention_check"":6,""DV5_DSES_9_Wealth"":0,""DV5_DSES_10_Attraction"":0,""DV5_DSES_11_Competence"":0,""DV5_DSES_12_Wealth"":0,""DV5_DSES_13_Attraction"":0,""DV5_DSES_14_Competence"":0,""DV5_DSES_15_Wealth"":0}","","","","","[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"
+"","","","","","survey-multi-choice","32","2.1.0","613080","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","18461","","{""demo_gender"":""Female""}","","","","","[0]"
+"","","","","","survey-text","33","2.0.0","620231","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","7142","","{""age"":""29""}","","","","",""
+"","","","","","survey-likert","34","2.0.0","641262","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","21025","","{""attention_check_3"":3}","","","","","[0]"
+"","","","","","survey-text","35","2.0.0","799930","pf348jspgt","2025-11-21","3f97","6920dfee728c34f6fd2fdeb0","6920f0e0df3169c19a94d3d3","Study1","loser","6780a03e84f574b4185e3f97","","158606","","{""funnel_1"":""luck"",""funnel_2"":""That every event has a cause"",""comments"":""""}","","","","",""
