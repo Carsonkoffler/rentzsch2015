@@ -1,6 +1,6 @@
 # Rentzsch & Gross, 2015 Replication
 
-This is a guide to the repository for the replication of Pelz et al., 2022.
+This is a guide to the repository for the replication of Rentzsch & Gross, 2015.
 
 ## Experiment Stimuli
 
